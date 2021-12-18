@@ -8,11 +8,18 @@
     </a>
     <hr>
         <ul class="nav-links">
-            <li class="<?php echo $currentPageName == "index" ? "current-page" : ""; ?>"><a href="index">Home</a></li>
-            <li class="<?php echo $currentPageName == "about" ? "current-page" : ""; ?>"><a href="about">About Us</a></li>
-            <li class="<?php echo $currentPageName == "architecture" ? "current-page" : ""; ?>"><a href="architecture">Architecture</a></li>
-            <li class="<?php echo $currentPageName == "art-instalations" ? "current-page" : ""; ?>"><a href="art-instalations">Art / Instalations</a></li>
-            <li class="<?php echo $currentPageName == "contact" ? "current-page" : ""; ?>"><a href="contact">Contact</a></li>
+            <?php
+                $query = "SELECT * FROM nav_links ORDER BY id";
+                $result = mysqli_query($connection, $query);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $name = $row['name'];
+                    $link_to = $row['link_to'];
+                    $currentPageClass = ($currentPageName == $link_to ? 'current-page' : '');
+                    $link_to = ($link_to == "index" ? "/" : $link_to);
+                    
+                    echo "<li class=".$currentPageClass."><a href=".$link_to.">$name</a></li>";
+                }
+            ?>
         </ul>
     </nav>
     <div id="hamburger">
