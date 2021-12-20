@@ -3,7 +3,16 @@
 
 <section class="hero">
     <div class="links-container">
-        <img src="img/nav_links/main.png" alt="" class="bg-image bg-bottom">
+        <?php
+            $bg_image_folder = $bg_image = "";
+            $query = "SELECT * FROM links_containers_bg WHERE container_name='nav_links' ORDER BY id LIMIT 1";
+            $result = mysqli_query($connection, $query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                $bg_image_folder = $row['bg_image_folder'];
+                $bg_image = $row['bg_image'];
+            }
+        ?>
+        <img src="img/<?php echo $bg_image_folder ?>/<?php echo $bg_image ?>" alt="" class="bg-image bg-bottom">
         <?php
             $cells_per_grid = 9;
             $inserted_items = 0;

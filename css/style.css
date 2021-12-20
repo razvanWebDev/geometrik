@@ -4,6 +4,7 @@
   --main-color: #4d4948;
   --main-color-transparent: rgba(77, 73, 72, 0.4);
   --white-color: #ffffff;
+  --border-color: #948784;
 
   --main-text-color: #a7d30c;
   --light-text-color: #666666;
@@ -205,7 +206,7 @@ section {
 header {
   z-index: 10;
   width: 100%;
-  height: 5em;
+  height: 7em;
   padding: 0 var(--sides-padding);
   display: flex;
   justify-content: space-between;
@@ -310,7 +311,7 @@ header .nav-links li:last-child {
 footer {
   width: 100%;
   padding: 0 var(--sides-padding);
-  height: 3em;
+  height: 5em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -331,8 +332,8 @@ footer a:visited {
 /*================ Home page======================== */
 .hero {
   width: 100%;
-  /* header(5em)+footer(3em) = 10em */
-  height: calc(100vh - 8em);
+  /* header(7em)+footer(5em) = 12em */
+  height: calc(100vh - 12em);
   padding: 0 var(--sides-padding);
 }
 
@@ -343,8 +344,9 @@ footer a:visited {
   position: relative;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  border-top: 2px solid var(--main-color);
-  border-left: 2px solid var(--main-color);
+  border-top: 2px solid var(--border-color);
+  border-left: 2px solid var(--border-color);
+  /* prevent bg image overflow */
   border-bottom: 1px solid var(--main-color);
 }
 
@@ -355,8 +357,10 @@ footer a:visited {
   position: relative;
   width: 100%;
   height: 100%;
-  border-bottom: 2px solid var(--main-color);
-  border-right: 2px solid var(--main-color);
+  padding: 0.5em;
+  overflow: hidden;
+  border-bottom: 2px solid var(--border-color);
+  border-right: 2px solid var(--border-color);
   cursor: pointer;
 }
 .links-container-item.empty {
@@ -365,8 +369,10 @@ footer a:visited {
 .links-container-item p {
   font-size: 1.5em;
   font-weight: 400;
+  text-align: center;
   color: var(--white-color);
-  text-shadow: 0px 0px 5px #1f1f1f;
+  text-shadow: 0px 0px 5px #1b1b1b;
+  z-index: 1;
 }
 .contact-container {
   display: flex;
@@ -452,7 +458,6 @@ footer a:visited {
   width: 100%;
   height: 100%;
   background-color: var(--main-color-transparent);
-  z-index: -1;
   opacity: 0;
 }
 .bg-image.bg-bottom {
