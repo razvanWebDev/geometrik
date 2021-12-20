@@ -30,10 +30,10 @@
                 $inserted_items++;
             }
             // populate the rest of the container with empty divs
-            while ($inserted_items < $cells_per_grid){
-                echo "<div class='links-container-item empty'></div>";
-                $inserted_items++;
-            }
+            // while ($inserted_items < $cells_per_grid){
+            //     echo "<div class='links-container-item empty'></div>";
+            //     $inserted_items++;
+            // }
         ?>
     </div>
   

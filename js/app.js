@@ -59,6 +59,16 @@ const closeNav = () => {
   hamburger.classList.remove("toggle-burger");
 };
 
+// ===========CAROUSELS=============================
+//initialize main carousel
+var flkty = new Flickity(".main-carousel", {
+  cellAlign: "left",
+  lazyLoad: true,
+  // wrapAround: true,
+  contain: true,
+  // pageDots: false,
+});
+
 // ==============================Forms validation======================
 function validateEmail(email) {
   var re =
