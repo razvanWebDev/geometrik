@@ -68,7 +68,15 @@ var flkty = new Flickity(".main-carousel", {
   contain: true,
   // pageDots: false,
 });
-
+//hide carousel dots if carousel has only 1 element
+const carouselDotsLists = document.querySelectorAll(".flickity-page-dots");
+if (carouselDotsLists) {
+  carouselDotsLists.forEach((dotsList) => {
+    if (dotsList.querySelectorAll("li").length <= 1) {
+      dotsList.style.display = "none";
+    }
+  });
+}
 // ==============================Forms validation======================
 function validateEmail(email) {
   var re =

@@ -368,6 +368,9 @@ footer a:visited {
 .flickity-page-dots {
   bottom: 0.5em;
 }
+.flickity-page-dots:disabled {
+  display: none;
+}
 /* white dots */
 .flickity-page-dots .dot {
   opacity: 0.75;
@@ -497,8 +500,8 @@ footer a:visited {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 120%;
+  height: 120%;
   background-color: var(--main-color-transparent);
   /* opacity: 0; */
 }
