@@ -66,25 +66,24 @@
         <?php
            
             $grid_cells_content = mysqli_query($connection, $QUERY_get_grid_cells_content);
-            if (mysqli_num_rows($grid_cells_content) > 0) { 
-                //insert items
-                while ($row = mysqli_fetch_assoc($grid_cells_content)) {
-                    $name = (!empty($row['name']) ? $row['name'] : "");
-                    $link_to = (!empty($row['link_to']) ? $row['link_to'] : "");
-                    $bg_image_folder = (!empty($row['bg_image_folder']) ? $row['bg_image_folder'] : ""); 
-                    $bg_image = (!empty($row['bg_image']) ? $row['bg_image'] : "");
-                    if($page_type == "category"){
-                        $id = (!empty($row['id']) ? $row['id'] : "");
-                        $project_first_foto = "SELECT * FROM projects_fotos WHERE project_id = $id ORDER BY id LIMIT 1";
-                        $result = mysqli_query($connection, $project_first_foto);
-                        while($row = mysqli_fetch_assoc($result)){
-                            $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
-                            $bg_image = (!empty($row['image']) ? $row['image'] : "");
-                        }
-                        // TODO: get the first image from the current project and set bg_image_folder & bg_image
+            //insert items
+            while ($row = mysqli_fetch_assoc($grid_cells_content)) {
+                $name = (!empty($row['name']) ? $row['name'] : "");
+                $link_to = (!empty($row['link_to']) ? $row['link_to'] : "");
+                $bg_image_folder = (!empty($row['bg_image_folder']) ? $row['bg_image_folder'] : ""); 
+                $bg_image = (!empty($row['bg_image']) ? $row['bg_image'] : "");
+                if($page_type == "category"){
+                    //display projects
+                    $project_id = (!empty($row['id']) ? $row['id'] : "");
+                    $project_first_foto = "SELECT * FROM projects_fotos WHERE project_id = $project_id ORDER BY id LIMIT 1";
+                    $result = mysqli_query($connection, $project_first_foto);
+                    while($row = mysqli_fetch_assoc($result)){
+                        $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
+                        $bg_image = (!empty($row['image']) ? $row['image'] : "");
+                        $link_to = "project?p_id=$project_id";
                     }
-                    include "PHP/links-container-item.php";
                 }
+                include "PHP/links-container-item.php";
             }
         ?>
         </div>

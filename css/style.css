@@ -418,6 +418,51 @@ footer a:visited {
   text-shadow: 0px 0px 7px #1b1b1b;
   z-index: 1;
 }
+
+/* =======project================= */
+.project {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.project-carousel-container {
+  width: 50%;
+  height: 100%;
+  padding-right: 2em;
+}
+.project-main-carousel {
+  width: 100%;
+  /* .project-main-carousel-nav height + top-margin */
+  height: calc(100% - 8em);
+}
+.project-carousel-cell {
+  width: 100%;
+  height: 100%;
+}
+.project-main-carousel-nav {
+  max-width: 100%;
+  height: 7.5em;
+  margin-top: 0.5em;
+}
+.project-main-carousel-nav .project-carousel-nav-cell {
+  width: 7em;
+  height: 100%;
+  margin-right: -1px;
+}
+.project-main-carousel-nav .flickity-button {
+  display: none;
+}
+.project-main-carousel-nav .project-carousel-nav-cell.is-nav-selected {
+  filter: grayscale(1);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.projects-description {
+  width: 50%;
+  height: 100%;
+  padding-left: 2em;
+}
+/* ********************************** */
 .contact-container {
   display: flex;
   width: 100%;
