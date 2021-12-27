@@ -16,7 +16,7 @@
             $page_type = "category";
     
         }
-        
+
         //query to get the total number of grid items (categories) if the $page_type is NOT category
         $QUERY_total_items = "SELECT * FROM categories";
         //query to get the bg for the carousel item if the $page_type is NOT category
@@ -31,7 +31,7 @@
                 //list projects in the current category
                 $QUERY_total_items = "SELECT * FROM projects WHERE category_id = $category_id";
                 //get the bg image for the current catgory
-                $QUERY_link_container_bg = "SELECT * FROM links_containers_bg WHERE category_id = $category_id ORDER BY id LIMIT 1";
+                $QUERY_link_container_bg = "SELECT * FROM categories WHERE id = $category_id ORDER BY id LIMIT 1";
             }
         }
 
@@ -58,24 +58,33 @@
             $bg_image_folder = $bg_image = "";
             $get_link_container_bg = mysqli_query($connection, $QUERY_link_container_bg);
             while ($row = mysqli_fetch_assoc($get_link_container_bg)) {
-                $bg_image_folder = $row['bg_image_folder'];
-                $bg_image = $row['bg_image'];
+                $bg_image_folder = (!empty($row['bg_image_folder']) ? $row['bg_image_folder'] : "");
+                $bg_image = (!empty($row['bg_image']) ? $row['bg_image'] : "");
             }
         ?>
             <img src="img/<?php echo $bg_image_folder ?>/<?php echo $bg_image ?>" alt="" class="bg-image bg-bottom">
         <?php
            
             $grid_cells_content = mysqli_query($connection, $QUERY_get_grid_cells_content);
-            //insert items
-            while ($row = mysqli_fetch_assoc($grid_cells_content)) {
-                $name = $row['name'];
-                $link_to = $row['link_to'];
-                $bg_image_folder = $row['bg_image_folder'];
-                $bg_image = $row['bg_image'];
-                if($page_type == "category"){
-                    // TODO: get the first image from the current project and set bg_image_folder & bg_image
+            if (mysqli_num_rows($grid_cells_content) > 0) { 
+                //insert items
+                while ($row = mysqli_fetch_assoc($grid_cells_content)) {
+                    $name = (!empty($row['name']) ? $row['name'] : "");
+                    $link_to = (!empty($row['link_to']) ? $row['link_to'] : "");
+                    $bg_image_folder = (!empty($row['bg_image_folder']) ? $row['bg_image_folder'] : ""); 
+                    $bg_image = (!empty($row['bg_image']) ? $row['bg_image'] : "");
+                    if($page_type == "category"){
+                        $id = (!empty($row['id']) ? $row['id'] : "");
+                        $project_first_foto = "SELECT * FROM projects_fotos WHERE project_id = $id ORDER BY id LIMIT 1";
+                        $result = mysqli_query($connection, $project_first_foto);
+                        while($row = mysqli_fetch_assoc($result)){
+                            $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
+                            $bg_image = (!empty($row['image']) ? $row['image'] : "");
+                        }
+                        // TODO: get the first image from the current project and set bg_image_folder & bg_image
+                    }
+                    include "PHP/links-container-item.php";
                 }
-                include "PHP/links-container-item.php";
             }
         ?>
         </div>
