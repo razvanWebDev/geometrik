@@ -4,10 +4,6 @@
 <section class="hero">
     <div class="main-carousel">
     <?php 
-        //TODO: take care of colaborations category
-    //TODO: carousel on the index page
-    // TODO: review the QUery from above and mke "dinamic the other queries"
-
         $page_type = "";
         $category_id;
         $current_category = "";
