@@ -13,8 +13,8 @@
             <div class="simple-page-main-carousel"
                 data-flickity='{"fullscreen": true, "pageDots": false, "bgLazyLoad": true}'>
                 <?php
-                    $project_fotos_query = "SELECT * FROM projects_fotos WHERE project_id=$project_id";
-                    $fotos_result = mysqli_query($connection, $project_fotos_query);
+                    $carousel_fotos_query = "SELECT * FROM projects_fotos WHERE project_id=$project_id";
+                    $fotos_result = mysqli_query($connection, $carousel_fotos_query);
 
                     while($row = mysqli_fetch_assoc($fotos_result)){
                         $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
@@ -30,8 +30,8 @@
             <div class="simple-page-main-carousel-nav"
                 data-flickity='{"asNavFor": ".simple-page-main-carousel", "contain": true, "pageDots": false}'>
                 <?php
-                    $project_fotos_query = "SELECT * FROM projects_fotos WHERE project_id=$project_id";
-                    $fotos_result = mysqli_query($connection, $project_fotos_query);
+                    $carousel_nav_fotos_query = "SELECT * FROM projects_fotos WHERE project_id=$project_id";
+                    $fotos_result = mysqli_query($connection, $carousel_nav_fotos_query);
 
                     while($row = mysqli_fetch_assoc($fotos_result)){
                         $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
@@ -45,16 +45,30 @@
                 ?>
             </div>
         </div>
-        <div class="simple-page-description">  
-            <h2 class="simple-page-title">
+        <div class="simple-page-description-container">
+            <div class="top-fade"></div>
+            <div class="simple-page-description">
+                <?php 
+                    $page_description_query = "SELECT * FROM projects WHERE id=$project_id ORDER BY id LIMIT 1";
+                    $description_result = mysqli_query($connection, $page_description_query);
+                    while($row = mysqli_fetch_assoc($description_result)){
+                        $title = (!empty($row['title']) ? $row['title'] : "");
+                        $subtitle = (!empty($row['subtitle']) ? $row['subtitle'] : "");
+                        $description = (!empty($row['description']) ? $row['description'] : "");
+                    }
 
-            </h2>
-            <h3 class="simple-page-subtitle">
-
-            </h3>
-            <p class="description">
-
-            </p>
+                    if($title !== ""){
+                        echo '<h2 class="simple-page-title">'.$title.'</h2>';
+                    }
+                    if($subtitle !== ""){
+                        echo '<h3 class="simple-page-subtitle">'.$subtitle.'</h3>';
+                    }
+                    if($description !== ""){
+                        echo '<div class="description">'.$description.'</div>';
+                    }
+                ?>
+            </div>
+            <div class="bottom-fade"></div>
         </div>
     </div>
 </section>

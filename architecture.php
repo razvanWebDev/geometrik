@@ -68,7 +68,7 @@
             $grid_cells_content = mysqli_query($connection, $QUERY_get_grid_cells_content);
             //insert items
             while ($row = mysqli_fetch_assoc($grid_cells_content)) {
-                $name = (!empty($row['name']) ? $row['name'] : "");
+                $name = (!empty($row['title']) ? $row['title'] : "");
                 $link_to = (!empty($row['link_to']) ? $row['link_to'] : "");
                 $bg_image_folder = (!empty($row['bg_image_folder']) ? $row['bg_image_folder'] : ""); 
                 $bg_image = (!empty($row['bg_image']) ? $row['bg_image'] : "");

@@ -3,7 +3,7 @@
 :root {
   --main-color: #4d4948;
   --main-color-transparent: rgba(77, 73, 72, 0.2);
-  --white-color: #ffffff;
+  --white-color: #ececec;
   --border-color: #948784;
 
   --main-text-color: #a7d30c;
@@ -174,7 +174,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(256, 256, 256, 0.95);
+  background-color: var(--main-color);
   z-index: 8;
   display: flex;
   justify-content: center;
@@ -436,7 +436,7 @@ footer a:visited {
   height: 100%;
 }
 .simple-page-carousel-container {
-  width: 50%;
+  width: 60%;
   height: 100%;
   padding-right: 2em;
 }
@@ -458,21 +458,69 @@ footer a:visited {
   width: 8em;
   height: 100%;
   margin-right: -1px;
-  z-index: 10;
+  filter: grayscale(1);
 }
 .simple-page-main-carousel-nav .flickity-button {
   display: none;
 }
 .simple-page-main-carousel-nav .simple-page-carousel-nav-cell.is-nav-selected {
-  filter: grayscale(1);
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  filter: grayscale(0);
+}
+.simple-page-description-container {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  padding-left: 3em;
+  color: var(--white-color);
+  overflow: hidden;
+}
+.simple-page-description {
+  width: 100%;
+  height: 100%;
+  color: var(--white-color);
+  overflow-y: auto;
+  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box; /* So the width will be 100% + 17px */
+}
+.simple-page-description a {
+  color: var(--main-text-color);
+}
+.simple-page-title {
+  font-size: 2.4em;
+  margin-bottom: 0.5em;
+}
+.simple-page-subtitle {
+  font-weight: 400;
+  font-size: 1.3em;
+  margin-bottom: 1em;
+}
+.simple-page-description .description {
+  text-align: justify;
+}
+.top-fade,
+.bottom-fade {
+  position: absolute;
+  width: calc(100% - 3.7em);
+  height: 5em;
+  /* z-index: 10; */
+  left: 2.8em;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
 }
 
-.simple-page-description {
-  width: 50%;
-  height: 100%;
-  padding-left: 2em;
+.top-fade {
+  top: 0;
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(to top, rgba(56, 56, 56, 0) 0px, rgb(56, 56, 56, 0.9) 90%)
+    repeat 0 0;
 }
+.bottom-fade {
+  bottom: 0;
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(to bottom, rgba(56, 56, 56, 0) 0px, rgb(56, 56, 56, 1) 90%)
+    repeat 0 0;
+}
+
 /* ********************************** */
 .contact-container {
   display: flex;

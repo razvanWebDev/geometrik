@@ -1,4 +1,3 @@
-// window.onload = () => {
 // =====================CACHE DOM ELEMENTS=====================
 const hamburger = document.querySelector("#hamburger");
 const nav = document.querySelector(".header-menu");
@@ -10,7 +9,6 @@ const allFieldsRequiredMessage_p = document.querySelector(
 );
 
 //FOOTER
-const upArrow = document.querySelector(".to-top-arrow");
 const currentYearSpan = document.querySelector(".current-year-span");
 
 // =========== General Functions =================
@@ -35,11 +33,9 @@ if (allImages) {
 
 // Preloader============
 const preloader = document.querySelector(".preloader");
-if (elementExists(preloader)) {
-  window.onload = () => {
-    preloader.classList.add("hide");
-  };
-}
+const hidePreloader = () => {
+  preloader.classList.add("hide");
+};
 
 // ========================HEADER============================
 
@@ -61,13 +57,17 @@ const closeNav = () => {
 
 // ===========CAROUSELS=============================
 //initialize main carousel
-var flkty = new Flickity(".main-carousel", {
-  cellAlign: "left",
-  lazyLoad: true,
-  // wrapAround: true,
-  contain: true,
-  // pageDots: false,
-});
+const mainCarousel = document.querySelector(".main-carousel");
+if (mainCarousel) {
+  var flkty = new Flickity(".main-carousel", {
+    cellAlign: "left",
+    lazyLoad: true,
+    // wrapAround: true,
+    contain: true,
+    // pageDots: false,
+  });
+}
+
 //hide carousel dots if carousel has only 1 element
 const carouselDotsLists = document.querySelectorAll(".flickity-page-dots");
 if (carouselDotsLists) {
@@ -151,17 +151,43 @@ const moveDown = (input) => {
 };
 
 //  ##############################################################
-// Scroll to top arrow==================
-const scrollToTop = () => window.scroll({ top: 0, behavior: "smooth" });
-// Show scroll up arrow
-const showItem = (item, scrollHeight) => {
-  const y = window.scrollY;
-  if (y >= scrollHeight) {
-    item.classList.add("show");
+// ================show/hide top & bottom fades
+
+const simplePageDescriptionContainer = document.querySelector(
+  ".simple-page-description-container"
+);
+const simplePageDescription = document.querySelector(
+  ".simple-page-description"
+);
+const topFade = document.querySelector(".top-fade");
+const bottomFade = document.querySelector(".bottom-fade");
+
+const showHideTopFade = () => {
+  if (simplePageDescription.scrollTop > 1) {
+    topFade.style.opacity = "1";
   } else {
-    item.classList.remove("show");
+    topFade.style.opacity = "0";
   }
 };
+
+const showHideBottomFade = () => {
+  if (
+    simplePageDescription.clientHeight + simplePageDescription.scrollTop + 1 >=
+    simplePageDescription.scrollHeight
+  ) {
+    // you're at the bottom of the div
+    bottomFade.style.opacity = "0";
+  } else {
+    bottomFade.style.opacity = "1";
+  }
+};
+
+if (simplePageDescription && topFade && bottomFade) {
+  simplePageDescription.onscroll = function () {
+    showHideTopFade();
+    showHideBottomFade();
+  };
+}
 
 //=========FOOTER===========
 const getCurrentYear = () => {
@@ -196,17 +222,17 @@ if (elementExists(labelTransform)) {
   });
 }
 
-// Show scroll to top arrow
-if (elementExists(upArrow)) {
-  window.addEventListener("scroll", () => showItem(upArrow, 300));
-}
-// scroll page to top
-if (elementExists(upArrow)) {
-  upArrow.addEventListener("click", scrollToTop);
-}
-
 //Validate contact form
 if (elementExists(submitContact)) {
   submitContact.addEventListener("click", validateForm);
 }
-// };
+
+window.onload = () => {
+  if (elementExists(preloader)) {
+    hidePreloader();
+  }
+  if (simplePageDescription && topFade && bottomFade) {
+    showHideTopFade();
+    showHideBottomFade();
+  }
+};
