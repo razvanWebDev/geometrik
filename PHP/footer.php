@@ -5,6 +5,7 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?always=1&scrolling=1&top=1&showNoConsent=1"></script> -->
     <!-- Carousel -->
     <script src="js/flickity.pkgd.min.js"></script>
+    <script src="js/fullscreen.js"></script>
     <!-- Custom JS -->
     <script src="js/app.js"></script>
 </body>
