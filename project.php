@@ -8,9 +8,9 @@
             $project_id = escape($_GET['p_id']);
         }
     ?>
-    <div class="project">
-        <div class="project-carousel-container">
-            <div class="project-main-carousel"
+    <div class="simple-page-layout">
+        <div class="simple-page-carousel-container">
+            <div class="simple-page-main-carousel"
                 data-flickity='{"fullscreen": true, "pageDots": false, "bgLazyLoad": true}'>
                 <?php
                     $project_fotos_query = "SELECT * FROM projects_fotos WHERE project_id=$project_id";
@@ -20,15 +20,15 @@
                         $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
                         $bg_image = (!empty($row['image']) ? $row['image'] : "");
                 ?>
-                <div class="project-carousel-cell">
+                <div class="simple-page-carousel-cell">
                     <img src="img/<?php echo $bg_image_folder." /".$bg_image ?>" class="bg-image" alt="">
                 </div>
                 <?php
                     }
                 ?>
             </div>
-            <div class="project-main-carousel-nav"
-                data-flickity='{"asNavFor": ".project-main-carousel", "contain": true, "pageDots": false}'>
+            <div class="simple-page-main-carousel-nav"
+                data-flickity='{"asNavFor": ".simple-page-main-carousel", "contain": true, "pageDots": false}'>
                 <?php
                     $project_fotos_query = "SELECT * FROM projects_fotos WHERE project_id=$project_id";
                     $fotos_result = mysqli_query($connection, $project_fotos_query);
@@ -37,7 +37,7 @@
                         $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
                         $bg_image = (!empty($row['image']) ? $row['image'] : "");
                 ?>
-                <div class="project-carousel-nav-cell">
+                <div class="simple-page-carousel-nav-cell">
                     <img src="img/<?php echo $bg_image_folder." /".$bg_image ?>" class="bg-image" alt="">
                 </div>
                 <?php
@@ -45,8 +45,16 @@
                 ?>
             </div>
         </div>
-        <div class="projects-description">
+        <div class="simple-page-description">  
+            <h2 class="simple-page-title">
 
+            </h2>
+            <h3 class="simple-page-subtitle">
+
+            </h3>
+            <p class="description">
+
+            </p>
         </div>
     </div>
 </section>
