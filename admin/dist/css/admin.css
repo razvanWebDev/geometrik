@@ -4,6 +4,9 @@
 .content-wrapper {
   padding: 0 1em;
 }
+.table-image {
+  height: 5em;
+}
 /* ========Edit User=============== */
 .image-container {
   position: relative;
