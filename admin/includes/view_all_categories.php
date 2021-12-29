@@ -3,8 +3,7 @@
  if(isset($_GET['delete'])) {
     if(isset($_SESSION['username'])){
       $delete_id = mysqli_real_escape_string($connection, $_GET['delete']);
-      $image_folder = isset($_GET['fldr']) && !empty($_GET['fldr']) ? $_GET['fldr'] : "architecture";
-      deleteFileFromRow("categories", "bg_image", $delete_id, "../img/$image_folder/");
+      deleteFileFromRow("categories", "bg_image", $delete_id, "../img/architecture/");
       //remove from db
       deleteItem("categories", $delete_id);
     }
@@ -22,10 +21,17 @@
   <!-- Default box -->
   <div class="card card-solid">
     <div class="card-body">
+
       <p class="text-danger text-lg">WARNING!!! <br>
-        If you want to delete a category, make sure to change the projects belonging to it and assign them a new existing category. <br>
+        If you want to delete a category, make sure to change the projects belonging to it and assign them a new
+        existing category. <br>
         Otherwise, theese projects won't be visible on the site.
-    </p>
+      </p>
+
+      <a href="categories.php?source=add_category" class="btn bg-primary mb-4">
+        <i class="fas fa-plus mr-2"></i>Add a category
+      </a>
+
       <table class="table table-bordered table-hover text-center">
         <thead>
           <tr>
@@ -37,11 +43,11 @@
           </tr>
         </thead>
         <tbody>
-      <?php
+          <?php
         //pagination
         $rowCounter_per_page = 0;
         //the number of posts per page
-        $articles_per_page = 20;
+        $articles_per_page = 15;
     
         if(isset($_GET['page'])){
             $page = $_GET['page'];
@@ -81,7 +87,8 @@
               <?php echo $title ?>
             </td>
             <td class="text-center">
-              <img class="table-image" src="../img/<?php echo $bg_image_folder ?>/<?php echo $bg_image ?>" alt="category image">
+              <img class="table-image" src="../img/<?php echo $bg_image_folder ?>/<?php echo $bg_image ?>"
+                alt="category image">
             </td>
             <td class="text-center">
               <a href="categories.php?source=edit_category&id=<?php echo $id; ?>" class="btn btn-sm btn-primary">
@@ -89,23 +96,25 @@
               </a>
             </td>
             <td class="text-center">
-              <a href="categories.php?delete=<?php echo $id; ?>&fldr=<?php echo $bg_image_folder ?>" onClick="javascript:return confirm('Delete category <?php echo $title; ?>?')"; class="btn btn-sm bg-danger">
+              <a href="categories.php?delete=<?php echo $id; ?>&fldr=<?php echo $bg_image_folder ?>"
+                onClick="javascript:return confirm('Are you sure you want to delete Delete category <?php echo $title; ?>?')" ;
+                class="btn btn-sm bg-danger">
                 <i class="fas fa-trash-alt mr-2"></i>
-                  Delete
+                Delete
               </a>
             </td>
-          <?php } ?>
+            <?php } ?>
 
         </tbody>
       </table>
 
-          </div>
     </div>
-    <!-- /.card-body -->
-    <div class="card-footer">
-      <nav aria-label="Contacts Page Navigation">
-        <ul class="pagination justify-content-center m-0">
-          <?php
+  </div>
+  <!-- /.card-body -->
+  <div class="card-footer">
+    <nav aria-label="Contacts Page Navigation">
+      <ul class="pagination justify-content-center m-0">
+        <?php
         if($count > 1){
           for($i = 1; $i <= $count; $i++){
             if($i == $page){
@@ -116,10 +125,10 @@
           }
         }
         ?>
-        </ul>
-      </nav>
-    </div>
-    <!-- /.card-footer -->
+      </ul>
+    </nav>
+  </div>
+  <!-- /.card-footer -->
   </div>
   <!-- /.card -->
 

@@ -181,6 +181,35 @@ function deleteBulk($tableName){
   }
 }
 
+function uploadFile($input, $path){
+
+  $fileName = $input['name'];
+  $fileTmpName = $input['tmp_name'];
+  $fileSize = $input['size'];
+  $fileType = $input['type'];
+
+  $fileExt = explode('.', $fileName);
+  $fileActualExt = strtolower(end($fileExt));
+  $allowed = array('jpeg', 'jpg', 'png');
+
+  if($fileName){
+    if(in_array($fileActualExt, $allowed)){
+      if($fileSize < 5000000){
+        $fileNameNew = uniqid().rand().".".$fileActualExt;
+        $fileDestination = $path.$fileNameNew;
+        move_uploaded_file($fileTmpName, $fileDestination);
+        return $fileNameNew;
+      }else{
+        echo "Your file is too big! ".$fileSize;
+      }
+    }else{
+      echo "You cannot upload files of this type";
+    }
+  }
+  //return name if no image is selected
+  return "";
+}
+
 function deleteFile($btnName, $tblName, $clmnName, $idName, $selectedId){
   // Delete a file where you need to provide an id
   global $connection;
@@ -205,7 +234,6 @@ function deleteFile($btnName, $tblName, $clmnName, $idName, $selectedId){
     }
   }
 }
-
 
 function deleteItem($tableName, $delete_id){
   //Delete an already selected row frm the db
@@ -296,6 +324,24 @@ function deleteFolder($dir) {
     return rmdir($dir);
   }else{
     echo "Selected folder does not exist!";
+  }
+}
+
+function createCategory($title, $imageName) {
+  global $connection;
+
+  $query = "INSERT INTO categories (title, link_to, bg_image) VALUES (?, ?, ?);";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: categories.php?source=add_category");
+    exit();
+  }else{
+    $trimmed_title = preg_replace("/[^a-zA-Z]+/", "", $title);
+    $link_to = "architecture?category=$trimmed_title";
+    mysqli_stmt_bind_param($stmt, "sss", $title, $link_to, $imageName);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);  
   }
 }
 
