@@ -345,5 +345,39 @@ function createCategory($title, $imageName) {
   }
 }
 
+function editCategory($title, $id) {
+  global $connection;
+
+  $query = "UPDATE categories SET title = ?, link_to = ? WHERE id = {$id}";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: categories.php?source=edit_category&id={$id}");
+    exit();
+  }else{
+    $trimmed_title = preg_replace("/[^a-zA-Z]+/", "", $title);
+    $link_to = "architecture?category=$trimmed_title";
+    mysqli_stmt_bind_param($stmt, "ss", $title, $link_to);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);  
+  }
+}
+
+function updateDbImage($tblName, $clmnName, $imageName, $id) {
+  global $connection;
+
+  $query = "UPDATE {$tblName} SET {$clmnName} = ? WHERE id = {$id}";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: admin.php");
+    exit();
+  }else{
+    mysqli_stmt_bind_param($stmt, "s", $imageName);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);  
+  }
+}
+
 
 ?>

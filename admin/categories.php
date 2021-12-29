@@ -22,6 +22,10 @@
         include "includes/edit_category.php";
         break;
 
+        case 'edit_category_photo';
+        include "includes/edit_category_photo.php";
+        break;
+
         default:
         include "includes/view_all_categories.php";
       }

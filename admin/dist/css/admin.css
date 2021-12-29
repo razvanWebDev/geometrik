@@ -33,19 +33,13 @@
   justify-content: center;
 }
 
-.image-actions .btn {
-  width: 5.5em;
-  height: 2.3em;
-  margin: 0 0.4em;
-}
-
 .change-photo:hover {
   opacity: 0.8;
 }
 /* ======edit photo========== */
 .edit-photo-img {
-  width: 15em;
-  max-height: 15em;
+  width: 25em;
+  max-height: 22em;
   object-fit: contain;
   margin-bottom: 2em;
   display: block;

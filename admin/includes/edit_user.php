@@ -111,7 +111,7 @@ if(isset($_POST['edit_user'])) {
                 <img src='dist/img/users/<?php echo $displayUserImage; ?>'>
                 <div class='image-actions'>
                   <a class='btn btn-primary'
-                    href='users.php?source=edit_user_photo&id=<?php echo $the_user_id ?>'>Chage</a>
+                    href='users.php?source=edit_user_photo&id=<?php echo $the_user_id ?>'>Change</a>
                   <a class='btn btn-danger' href='users.php?source=edit_user&u_id=<?php echo $the_user_id; ?>&delete=<?php echo $the_user_id; ?>'
                     onClick="javascript:return confirm('Delete photo?');">Delete</a>
                 </div>
