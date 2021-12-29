@@ -65,13 +65,13 @@
             $short_message = strip_tags($message);
             if (strlen($short_message) > 50) {
 
-                // truncate string
-                $stringCut = substr($short_message, 0, 45);
-                $endPoint = strrpos($stringCut, ' ');
-            
-                //if the string doesn't contain any space then it will cut without word basis.
-                $short_message = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                $short_message .= '...';
+              // truncate string
+              $stringCut = substr($short_message, 0, 45);
+              $endPoint = strrpos($stringCut, ' ');
+          
+              //if the string doesn't contain any space then it will cut without word basis.
+              $short_message = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+              $short_message .= '...';
             } 
         
         ?>

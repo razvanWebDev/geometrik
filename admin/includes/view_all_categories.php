@@ -29,7 +29,7 @@
       </p>
 
       <a href="categories.php?source=add_category" class="btn bg-primary mb-4">
-        <i class="fas fa-plus mr-2"></i>Add a category
+        <i class="fas fa-plus mr-2"></i>Add a Category
       </a>
 
       <table class="table table-bordered table-hover text-center">
