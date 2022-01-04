@@ -76,7 +76,7 @@ window.onload = () => {
 Dropzone.options.dropzoneFrom = {
   maxFilesize: 5,
   resizeWidth: 1920,
-  resizeQuality: 1.0,
+  resizeQuality: 0.8,
   acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
   init: function () {
     myDropzone = this;
