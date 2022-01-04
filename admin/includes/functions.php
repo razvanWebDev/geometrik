@@ -349,7 +349,7 @@ function createCategory($title, $imageName) {
     header("Location: categories.php?source=add_category");
     exit();
   }else{
-    $trimmed_title = strtolower(preg_replace("/[^a-zA-Z]+/", "-", $title));
+    $trimmed_title = strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $title));
     $link_to = "architecture?category=$trimmed_title";
     mysqli_stmt_bind_param($stmt, "sss", $title, $link_to, $imageName);
     mysqli_stmt_execute($stmt);
@@ -367,7 +367,7 @@ function editCategory($title, $id) {
     header("Location: categories.php?source=edit_category&id={$id}");
     exit();
   }else{
-    $trimmed_title = strtolower(preg_replace("/[^a-zA-Z]+/", "-", $title));
+    $trimmed_title = strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $title));
     $link_to = "architecture?category=$trimmed_title";
     mysqli_stmt_bind_param($stmt, "ss", $title, $link_to);
     mysqli_stmt_execute($stmt);
