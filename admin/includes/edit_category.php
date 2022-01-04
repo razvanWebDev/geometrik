@@ -73,7 +73,7 @@ if(isset($_POST['submit'])) {
 }
 ?>
 
-<?php $page_title = "Add a category"; ?>
+<?php $page_title = "Edit category"; ?>
     <?php include "page_title.php"; ?>
 
   <!-- Main content -->

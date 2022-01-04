@@ -378,19 +378,37 @@ function editCategory($title, $id) {
 function  createProject($title, $subtitle, $description, $categoryId) {
   global $connection;
 
-  $query = "INSERT INTO projects (title, subtitle, description, category_id) VALUES (?, ?, ?, ?);";
+  $query = "INSERT INTO projects (title, link_to, subtitle, description, category_id) VALUES (?, ?, ?, ?, ?);";
   $stmt = mysqli_stmt_init($connection);
 
   if(!mysqli_stmt_prepare($stmt, $query)){
     header("Location: projects.php?source=add_project");
     exit();
   }else{
-    mysqli_stmt_bind_param($stmt, "ssss", $title, $subtitle, $description, $categoryId);
+    $link_to = strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $title));
+    mysqli_stmt_bind_param($stmt, "sssss", $title, $link_to, $subtitle, $description, $categoryId);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt); 
     //get the project id 
     $last_id =  mysqli_insert_id($connection);
     return $last_id;
+  }
+}
+
+function editProject($title, $subtitle, $description, $categoryId, $id) {
+  global $connection;
+
+  $query = "UPDATE projects SET title = ?, link_to = ?, subtitle = ?, description = ?, category_id = ? WHERE id = {$id}";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: projects.php?source=edit_project&id={$id}");
+    exit();
+  }else{
+    $link_to = strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $title));
+    mysqli_stmt_bind_param($stmt, "sssss", $title, $link_to, $subtitle, $description, $categoryId);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);  
   }
 }
 

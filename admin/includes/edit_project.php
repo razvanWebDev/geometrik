@@ -1,4 +1,19 @@
 <?php
+//get the project data
+if(isset($_GET['id'])){
+  $project_id = $_GET['id'];
+}
+$query = "SELECT * FROM projects WHERE id = {$project_id}";
+$result = mysqli_query($connection, $query);
+$db_id = $db_title = $db_subtitle = $db_description = $db_category_id = "";
+while ($row = mysqli_fetch_assoc($result)) {
+  $db_id = $row['id'];
+  $db_title = (!empty($row['title']) ? $row['title'] : "");
+  $db_subtitle = (!empty($row['subtitle']) ? $row['subtitle'] : "");
+  $db_description = (!empty($row['description']) ? $row['description'] : ""); 
+  $db_category_id = (!empty($row['category_id']) ? $row['category_id'] : "");  
+}
+
 $invalidTitleClass = "";
 $showTitleError = "none";
 $titleErrorText = "";
@@ -15,12 +30,11 @@ if(isset($_GET['failed'])){
     }
   }
 } 
-//get input values in case the username or email already exist
-$titleInputValue = isset($_GET['name']) ? $_GET['name'] : "";
-$subtitleInputValue = isset($_GET['subtitle']) ? $_GET['subtitle'] : "";
-$descriptionInputValue = isset($_GET['description']) ? $_GET['description'] : "";
-$selectedCategory = isset($_GET['category']) ? $_GET['category'] : "";
-
+//get input values in case of error
+$titleInputValue = isset($_GET['name']) ? $_GET['name'] : $db_title;
+$subtitleInputValue = isset($_GET['subtitle']) ? $_GET['subtitle'] : $db_subtitle;
+$descriptionInputValue = isset($_GET['description']) ? $_GET['description'] : $db_description;
+$selectedCategory = isset($_GET['category']) ? $_GET['category'] : $db_category_id;
 
 if(isset($_POST['submit'])) {
   $title = escape($_POST['title']);
@@ -40,18 +54,9 @@ if(isset($_POST['submit'])) {
   if(!empty($error_msg)){
     header("Location: projects.php?source=add_project&failed=true$error_msg&name=$title&subtitle=$subtitle&description=$description&category=$categoryId");
   }else{
-    //add new project db
-   // $imageName = uploadFile($bg_image_input, $image_path);
-    $lastId = createProject($title, $subtitle, $description, $categoryId);
-    // create images folder
-    $new_folder = "../img/projects/{$lastId}";
-    if (!is_dir($new_folder)) {
-      mkdir($new_folder, 0777, true);
-    }else{
-        die("There was an error creating the photos folder");
-    }
+    editProject($title, $subtitle, $description, $categoryId, $db_id);
 
-    header("Location: projects.php?source=project_fotos&project_id=$lastId");
+    header("Location: projects.php");
     exit();
   }
 }
@@ -123,7 +128,7 @@ if(isset($_POST['submit'])) {
     <div class="row">
       <div class="col-12">
         <a href="javascript:history.back(1)" class="btn btn-secondary">Cancel</a>
-        <input type="submit" value="Save and add photos" name="submit" id="submit"
+        <input type="submit" value="Save project" name="submit" id="submit"
           class="btn btn-success float-right">
       </div>
     </div>

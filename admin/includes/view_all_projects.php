@@ -63,7 +63,7 @@
         $count = mysqli_num_rows($select_post_query_count);
         $count = ceil($count / $articles_per_page); 
 
-        $query = "SELECT * FROM projects ORDER BY id LIMIT $page_1, $articles_per_page";
+        $query = "SELECT * FROM projects ORDER BY id DESC LIMIT $page_1, $articles_per_page";
         $select_users = mysqli_query($connection, $query);
 
         while ($row = mysqli_fetch_assoc($select_users)) {
@@ -129,7 +129,7 @@
                 href='projects.php?source=project_fotos&project_id=<?php echo $id ?>'>Manage Photos</a>
             </td>
             <td class="text-center">
-              <a href="projects.php?source=project_fotos&project_id=<?php echo $id ?>"
+              <a href="projects.php?source=edit_project&id=<?php echo $id ?>"
                 class="btn btn-sm btn-primary edit-delete-btn">
                 <i class="far fa-edit mr-2"></i>Edit
               </a>
