@@ -74,7 +74,9 @@ window.onload = () => {
 //Dropzone file uploads (must pe outside window.onload area!!! )==============
 //upload files
 Dropzone.options.dropzoneFrom = {
-  maxFilesize: 3,
+  maxFilesize: 5,
+  resizeWidth: 1920,
+  resizeQuality: 1.0,
   acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
   init: function () {
     myDropzone = this;
