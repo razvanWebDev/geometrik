@@ -126,10 +126,10 @@
             <td class="text-center">
               <img class="table-image" src="../img/<?php echo $folder_name ?>/<?php echo $image ?>" alt=" ">
               <a class='btn btn-primary mt-2'
-                href='projects.php?source=edit_projects_photos&id=<?php echo $id ?>'>Change Photos</a>
+                href='projects.php?source=project_fotos&project_id=<?php echo $id ?>'>Manage Photos</a>
             </td>
             <td class="text-center">
-              <a href="projects.php?source=edit_project&id=<?php echo $id; ?>"
+              <a href="projects.php?source=project_fotos&project_id=<?php echo $id ?>"
                 class="btn btn-sm btn-primary edit-delete-btn">
                 <i class="far fa-edit mr-2"></i>Edit
               </a>
