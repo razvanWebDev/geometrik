@@ -1,14 +1,23 @@
 <!-- DELETE CATEGORY -->
 <?php 
  if(isset($_GET['delete'])) {
-    if(isset($_SESSION['username'])){
-      $delete_id = mysqli_real_escape_string($connection, $_GET['delete']);
-      deleteFileFromRow("categories", "bg_image", $delete_id, "../img/architecture/");
-      //remove from db
-      deleteItem("categories", $delete_id);
-    }
-    header("Location: categories.php");
+  if(isset($_SESSION['username'])){
+    $delete_id = mysqli_real_escape_string($connection, $_GET['delete']);
+
+
+    //remove project
+    deleteItem('projects', $delete_id);
+
+    //remove photos from db
+    deleteItemDiffID("projects_fotos", "project_id", $delete_id);
+    // remove folder
+    deleteFolder("../img/projects/$delete_id/");
+    header("Location: projects.php");
+    exit();  
+  }else{
+    header("Location: index.php");
     exit();
+  }
  }
 ?>
 
@@ -75,7 +84,7 @@
           $subtitle = (!empty($row['subtitle']) ? $row['subtitle'] : "");
           $description = (!empty($row['description']) ? $row['description'] : ""); 
           $category_id = (!empty($row['category_id']) ? $row['category_id'] : ""); 
-          //get shotr text for expandable table
+          //get short text for expandable table
           // $short_text = strip_tags($description);
           $short_text = $description;
           if (strlen($short_text) > 175) {
