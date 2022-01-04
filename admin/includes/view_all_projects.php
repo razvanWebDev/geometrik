@@ -1,17 +1,17 @@
-<!-- DELETE CATEGORY -->
+<!-- DELETE PROJECT -->
 <?php 
  if(isset($_GET['delete'])) {
   if(isset($_SESSION['username'])){
     $delete_id = mysqli_real_escape_string($connection, $_GET['delete']);
 
-
     //remove project
     deleteItem('projects', $delete_id);
-
     //remove photos from db
     deleteItemDiffID("projects_fotos", "project_id", $delete_id);
     // remove folder
-    deleteFolder("../img/projects/$delete_id/");
+    if(!empty($delete_id && $delete_id > 0)){
+      deleteFolder("../img/projects/$delete_id/");
+    }
     header("Location: projects.php");
     exit();  
   }else{
