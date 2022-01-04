@@ -76,7 +76,8 @@
           $description = (!empty($row['description']) ? $row['description'] : ""); 
           $category_id = (!empty($row['category_id']) ? $row['category_id'] : ""); 
           //get shotr text for expandable table
-          $short_text = strip_tags($description);
+          // $short_text = strip_tags($description);
+          $short_text = $description;
           if (strlen($short_text) > 175) {
 
             // truncate string
@@ -104,11 +105,9 @@
               $folder_name = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
               $image = (!empty($row['image']) ? $row['image'] : ""); 
             }
-
-
       ?>
 
-          <tr  data-widget="expandable-table" aria-expanded="false">
+          <tr data-widget="expandable-table" aria-expanded="false">
             <td>
               <?php echo $totalRowCounter ?>
             </td>
@@ -125,25 +124,25 @@
               <?php echo $category_name ?>
             </td>
             <td class="text-center">
-              <img class="table-image" src="../img/<?php echo $folder_name ?>/<?php echo $image ?>"
-                alt="project first image">
-                <a class='btn btn-primary mt-2'
-                    href='projects.php?source=edit_projects_photos&id=<?php echo $id ?>'>Change Photos</a>
+              <img class="table-image" src="../img/<?php echo $folder_name ?>/<?php echo $image ?>" alt=" ">
+              <a class='btn btn-primary mt-2'
+                href='projects.php?source=edit_projects_photos&id=<?php echo $id ?>'>Change Photos</a>
             </td>
             <td class="text-center">
-              <a href="projects.php?source=edit_project&id=<?php echo $id; ?>" class="btn btn-sm btn-primary edit-delete-btn">
+              <a href="projects.php?source=edit_project&id=<?php echo $id; ?>"
+                class="btn btn-sm btn-primary edit-delete-btn">
                 <i class="far fa-edit mr-2"></i>Edit
               </a>
             </td>
             <td class="text-center">
               <a href="projects.php?delete=<?php echo $id; ?>&fldr=<?php echo $foldername ?>"
-                onClick="javascript:return confirm('Are you sure you want to delete Delete project <?php echo $title; ?>?')" ;
-                class="btn btn-sm bg-danger edit-delete-btn">
+                onClick="javascript:return confirm('Are you sure you want to delete Delete project <?php echo $title; ?>?')"
+                ; class="btn btn-sm bg-danger edit-delete-btn">
                 <i class="fas fa-trash-alt mr-2"></i>
                 Delete
               </a>
             </td>
-            </tr>
+          </tr>
           <tr class="expandable-body">
             <td colspan="8" class="text-justify">
               <p>
@@ -151,11 +150,10 @@
               </p>
             </td>
           </tr>
-            <?php } ?>
+          <?php } ?>
 
         </tbody>
       </table>
-
     </div>
   </div>
   <!-- /.card-body -->

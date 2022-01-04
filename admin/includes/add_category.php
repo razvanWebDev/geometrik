@@ -54,7 +54,6 @@ if(isset($_POST['submit'])) {
   $categories_query = "SELECT * FROM categories WHERE title='{$title}'";
   $categories_result = mysqli_query($connection, $categories_query);
   $categories_count = mysqli_num_rows($categories_result);
-  echo $categories_count;
   if($categories_count > 0){
     $titleError .= "&nameErr=exists";
   }

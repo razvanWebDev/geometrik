@@ -67,9 +67,9 @@
         $count = ceil($count / $articles_per_page); 
 
         $query = "SELECT * FROM categories ORDER BY id LIMIT $page_1, $articles_per_page";
-        $select_users = mysqli_query($connection, $query);
+        $select_categories = mysqli_query($connection, $query);
 
-        while ($row = mysqli_fetch_assoc($select_users)) {
+        while ($row = mysqli_fetch_assoc($select_categories)) {
           $rowCounter_per_page++;
           $totalRowCounter = $rowCounter_per_page + (($page-1) * $articles_per_page);
           

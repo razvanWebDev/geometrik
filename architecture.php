@@ -5,7 +5,7 @@
     <div class="main-carousel">
     <?php 
         $page_type = "";
-        $category_id;
+        $category_id = 0;
         $current_category = "";
         if(isset($_GET['category']) && isset($_GET['category']) != "" ){
             $current_category = "architecture?category=".$_GET['category'];

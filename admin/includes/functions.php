@@ -182,7 +182,6 @@ function deleteBulk($tableName){
 }
 
 function uploadFile($input, $path){
-
   $fileName = $input['name'];
   $fileTmpName = $input['tmp_name'];
   $fileSize = $input['size'];
@@ -200,10 +199,10 @@ function uploadFile($input, $path){
         move_uploaded_file($fileTmpName, $fileDestination);
         return $fileNameNew;
       }else{
-        echo "Your file is too big! ".$fileSize;
+        die ("Your file is too big! ".$fileSize);
       }
     }else{
-      echo "You cannot upload files of this type";
+      die ("You cannot upload files of this type");
     }
   }
   //return name if no image is selected
@@ -238,10 +237,8 @@ function deleteFile($btnName, $tblName, $clmnName, $idName, $selectedId){
 function deleteItem($tableName, $delete_id){
   //Delete an already selected row frm the db
   global $connection;
-  if(isset($_SESSION['username'])){
-    $query = "DELETE FROM {$tableName} WHERE id = {$delete_id}";
-    $delete_query = mysqli_query($connection, $query);
-  }
+  $query = "DELETE FROM {$tableName} WHERE id = {$delete_id}";
+  $delete_query = mysqli_query($connection, $query);
 }
 
 function deleteItemDiffID($tableName, $id, $delete_id){
@@ -258,7 +255,6 @@ function deleteFileFromRow($tblName, $clmnName, $selectedId, $path){
   //When you delete an entire row from the db, CALL THIS TO ALSO REMOVE THE FILE
    // Call example: deleteFileFromRow("news", "post_image", $the_post_id, "../img/");
   global $connection;
-
   //delete actual file
   $query = "SELECT * FROM {$tblName} WHERE id = '{$selectedId}'";
   $result = mysqli_query($connection, $query);
@@ -313,6 +309,22 @@ function deleteFileFromRowDiffID($tblName, $id, $clmnName, $selectedId, $path){
   }
 }
 
+function updateDbImage($tblName, $clmnName, $imageName, $id) {
+  global $connection;
+
+  $query = "UPDATE {$tblName} SET {$clmnName} = ? WHERE id = {$id}";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: admin.php");
+    exit();
+  }else{
+    mysqli_stmt_bind_param($stmt, "s", $imageName);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);  
+  }
+}
+
 // delete folder and files in it
 function deleteFolder($dir) {
   global $connection;
@@ -337,7 +349,7 @@ function createCategory($title, $imageName) {
     header("Location: categories.php?source=add_category");
     exit();
   }else{
-    $trimmed_title = preg_replace("/[^a-zA-Z]+/", "", $title);
+    $trimmed_title = strtolower(preg_replace("/[^a-zA-Z]+/", "-", $title));
     $link_to = "architecture?category=$trimmed_title";
     mysqli_stmt_bind_param($stmt, "sss", $title, $link_to, $imageName);
     mysqli_stmt_execute($stmt);
@@ -355,7 +367,7 @@ function editCategory($title, $id) {
     header("Location: categories.php?source=edit_category&id={$id}");
     exit();
   }else{
-    $trimmed_title = preg_replace("/[^a-zA-Z]+/", "", $title);
+    $trimmed_title = strtolower(preg_replace("/[^a-zA-Z]+/", "-", $title));
     $link_to = "architecture?category=$trimmed_title";
     mysqli_stmt_bind_param($stmt, "ss", $title, $link_to);
     mysqli_stmt_execute($stmt);
@@ -363,21 +375,39 @@ function editCategory($title, $id) {
   }
 }
 
-function updateDbImage($tblName, $clmnName, $imageName, $id) {
+function  createProject($title, $subtitle, $description, $categoryId) {
   global $connection;
 
-  $query = "UPDATE {$tblName} SET {$clmnName} = ? WHERE id = {$id}";
+  $query = "INSERT INTO projects (title, subtitle, description, category_id) VALUES (?, ?, ?, ?);";
   $stmt = mysqli_stmt_init($connection);
 
   if(!mysqli_stmt_prepare($stmt, $query)){
-    header("Location: admin.php");
+    header("Location: projects.php?source=add_project");
     exit();
   }else{
-    mysqli_stmt_bind_param($stmt, "s", $imageName);
+    mysqli_stmt_bind_param($stmt, "ssss", $title, $subtitle, $description, $categoryId);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt); 
+    //get the project id 
+    $last_id =  mysqli_insert_id($connection);
+    return $last_id;
+  }
+}
+
+function addDropzoneImagesToDB($project_id, $folder_name, $imageName){
+  global $connection;
+
+  $query = "INSERT INTO projects_fotos (project_id, folder_name, image) VALUES (?, ?, ?);";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: projects.php?source=project_fotos");
+    exit();
+  }else{
+    mysqli_stmt_bind_param($stmt, "sss", $project_id, $folder_name, $imageName);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);  
   }
 }
-
 
 ?>

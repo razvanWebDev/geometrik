@@ -11,8 +11,13 @@
 <script src="plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- dropzonejs -->
+<script src="plugins/dropzone/min/dropzone.min.js"></script>
 <!-- Custom JS -->
 <script src="dist/js/admin.js"></script>
+
 </body>
 
 </html>

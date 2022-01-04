@@ -22,8 +22,8 @@
         include "includes/edit_project.php";
         break;
 
-        case 'edit_project_photos';
-        include "includes/edit_project_photos.php";
+        case 'project_fotos';
+        include "includes/project_fotos.php";
         break;
 
         default:

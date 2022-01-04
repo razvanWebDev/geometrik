@@ -1,20 +1,20 @@
 window.onload = () => {
   //HTML elements
   const sidebarLinks = document.querySelectorAll(".nav-treeview .nav-link");
+  const btnDone = document.querySelector("#btnDone");
+  //get current page
+  let currentPageURL = window.location.href;
+  if (currentPageURL.indexOf("?") > 0) {
+    currentPageURL = currentPageURL.substring(0, currentPageURL.indexOf("?"));
+  }
 
   // Check if element exists before calling function
   const elementExists = (element) => {
-    return element != undefined && element != null;
+    return typeof element !== "undefined" && element !== null;
   };
 
   //Get current sideBar page==========
   const getCurrentSidebarPage = () => {
-    let currentPageURL = window.location.href;
-
-    if (currentPageURL.indexOf("?") > 0) {
-      currentPageURL = currentPageURL.substring(0, currentPageURL.indexOf("?"));
-    }
-
     sidebarLinks.forEach((sidebarLink) => {
       sidebarLink.classList.remove("active");
       const currentLink = sidebarLink.href;
@@ -46,4 +46,74 @@ window.onload = () => {
   $(function () {
     bsCustomFileInput.init();
   });
+  //initialize summernote text-editor
+  $(function () {
+    $("#summernote").summernote({
+      height: 200,
+      toolbar: [
+        ["font", ["bold", "underline", "clear"]],
+        ["fontname", ["fontname"]],
+        ["color", ["color"]],
+        ["para", ["ul", "ol", "paragraph"]],
+        ["table", ["table"]],
+        ["insert", ["link"]],
+        ["view", ["fullscreen", "codeview", "help"]],
+      ],
+    });
+  });
+  // redirect when finished changing fotos
+  if (btnDone) {
+    btnDone.addEventListener("click", () => {
+      window.location = currentPageURL;
+    });
+  }
+
+  // end of window.onload
 };
+
+//Dropzone file uploads (must pe outside window.onload area!!! )==============
+//upload files
+Dropzone.options.dropzoneFrom = {
+  maxFilesize: 3,
+  acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
+  init: function () {
+    myDropzone = this;
+    this.on("complete", function () {
+      if (
+        this.getQueuedFiles().length == 0 &&
+        this.getUploadingFiles().length == 0
+      ) {
+        var _this = this;
+        _this.removeAllFiles();
+      }
+      list_image(post_id.value);
+    });
+  },
+};
+//display uploaded files
+function list_image(post_id) {
+  $.ajax({
+    url: `upload_project_fotos.php?post_id=${post_id}`,
+    success: function (data) {
+      $("#preview").html(data);
+    },
+  });
+}
+//display existing images on page load
+if (typeof post_id !== "undefined" && post_id !== null) {
+  list_image(post_id.value);
+}
+
+//delete photo
+$(document).on("click", ".remove_image", function () {
+  var id = $(this).attr("id");
+  $.ajax({
+    url: `upload_project_fotos.php?post_id=${post_id.value}`,
+    method: "POST",
+    data: { id: id },
+    success: function (data) {
+      list_image(post_id.value);
+    },
+  });
+});
+// #################################################
