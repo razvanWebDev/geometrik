@@ -4,7 +4,7 @@
 <section class="hero">
     <div class="main-carousel">
     <?php 
-        $page_type = "";
+        $page_type = "main";
         $category_id = 0;
         $current_category = "";
         if(isset($_GET['category']) && isset($_GET['category']) != "" ){
@@ -64,14 +64,18 @@
             $grid_cells_content = mysqli_query($connection, $QUERY_get_grid_cells_content);
             //add items to grid
             while ($row = mysqli_fetch_assoc($grid_cells_content)) {
+                $current_id = (!empty($row['id']) ? $row['id'] : "");
+                //display categories
+
                 $name = (!empty($row['title']) ? $row['title'] : "");
                 $link_to = (!empty($row['link_to']) ? $row['link_to'] : "");
                 $bg_image_folder = (!empty($row['bg_image_folder']) ? $row['bg_image_folder'] : ""); 
                 $bg_image = (!empty($row['bg_image']) ? $row['bg_image'] : "");
+               
                 if($page_type == "category"){
                     //display projects
-                    $project_id = (!empty($row['id']) ? $row['id'] : "");
-                    $project_first_foto = "SELECT * FROM projects_fotos WHERE project_id = $project_id ORDER BY id LIMIT 1";
+                  //  $project_id = (!empty($row['id']) ? $row['id'] : "");
+                    $project_first_foto = "SELECT * FROM projects_fotos WHERE project_id = $current_id ORDER BY id LIMIT 1";
                     $result = mysqli_query($connection, $project_first_foto);
                     while($row = mysqli_fetch_assoc($result)){
                         $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
@@ -79,7 +83,11 @@
                         $link_to = "project?link={$link_to}";
                     }
                 }
-                include "PHP/links-container-item.php";
+                //only show categories if they have projects
+                $categoryHasItems = isNameTaken ("projects", "category_id", $current_id) || $page_type !== "main";
+                if($categoryHasItems){
+                    include "PHP/links-container-item.php";
+                }
             }
         ?>
         </div>
