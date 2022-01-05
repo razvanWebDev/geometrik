@@ -12,6 +12,9 @@ if(isset($_GET['failed'])){
       if($_GET['nameErr'] == "required"){
         $titleErrorText .= "This fiels is required. ";
       }
+      if($_GET['nameErr'] == "exists"){
+        $titleErrorText .= "This project name already exists! ";
+      }
     }
   }
 } 
@@ -35,14 +38,21 @@ if(isset($_POST['submit'])) {
     $titleError .= "&nameErr=required";
   }
 
+  //check if project link exists
+  $link_to = stripSpecialChars($title);
+  $is_name_taken = isNameTaken ("projects", "link_to", $link_to);
+  if($is_name_taken){
+    $titleError .= "&nameErr=exists";
+  }
+
   $error_msg = $titleError;
 
   if(!empty($error_msg)){
     header("Location: projects.php?source=add_project&failed=true$error_msg&name=$title&subtitle=$subtitle&description=$description&category=$categoryId");
   }else{
     //add new project db
-   // $imageName = uploadFile($bg_image_input, $image_path);
     $lastId = createProject($title, $subtitle, $description, $categoryId);
+
     // create images folder
     $new_folder = "../img/projects/{$lastId}";
     if (!is_dir($new_folder)) {

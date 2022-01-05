@@ -62,7 +62,7 @@ if(isset($_POST['submit'])) {
 }
 ?>
 
-<?php $page_title = "Add a new project"; ?>
+<?php $page_title = "Edit project"; ?>
 <?php include "page_title.php"; ?>
 
 <!-- Main content -->

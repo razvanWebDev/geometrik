@@ -8,7 +8,7 @@
         $category_id = 0;
         $current_category = "";
         if(isset($_GET['category']) && isset($_GET['category']) != "" ){
-            $current_category = "architecture?category=".$_GET['category'];
+            $current_category = escape("architecture?category=".$_GET['category']);
             $page_type = "category";
     
         }
@@ -62,7 +62,7 @@
         <?php
            
             $grid_cells_content = mysqli_query($connection, $QUERY_get_grid_cells_content);
-            //insert items
+            //add items to grid
             while ($row = mysqli_fetch_assoc($grid_cells_content)) {
                 $name = (!empty($row['title']) ? $row['title'] : "");
                 $link_to = (!empty($row['link_to']) ? $row['link_to'] : "");
@@ -76,7 +76,7 @@
                     while($row = mysqli_fetch_assoc($result)){
                         $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
                         $bg_image = (!empty($row['image']) ? $row['image'] : "");
-                        $link_to = "project?p_id=$project_id";
+                        $link_to = "project?link={$link_to}";
                     }
                 }
                 include "PHP/links-container-item.php";

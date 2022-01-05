@@ -339,6 +339,38 @@ function deleteFolder($dir) {
   }
 }
 
+function addDropzoneImagesToDB($project_id, $folder_name, $imageName){
+  global $connection;
+
+  $query = "INSERT INTO projects_fotos (project_id, folder_name, image) VALUES (?, ?, ?);";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: projects.php?source=project_fotos");
+    exit();
+  }else{
+    mysqli_stmt_bind_param($stmt, "sss", $project_id, $folder_name, $imageName);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);  
+  }
+}
+//strip special characters & replace space with "-"
+function stripSpecialChars($string){
+  global $connection;
+  return strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $string));
+}
+
+//check if item exists in DB
+function isNameTaken ($tblName, $db_name, $name){
+  global $connection;
+
+  $query = "SELECT * FROM {$tblName} WHERE {$db_name} = '{$name}'";
+  $result = mysqli_query($connection, $query);
+  $count = mysqli_num_rows($result);
+  $isNameTaken = $count > 0;
+  return $isNameTaken;
+}
+
 function createCategory($title, $imageName) {
   global $connection;
 
@@ -349,7 +381,7 @@ function createCategory($title, $imageName) {
     header("Location: categories.php?source=add_category");
     exit();
   }else{
-    $trimmed_title = strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $title));
+    $trimmed_title = stripSpecialChars($title);
     $link_to = "architecture?category=$trimmed_title";
     mysqli_stmt_bind_param($stmt, "sss", $title, $link_to, $imageName);
     mysqli_stmt_execute($stmt);
@@ -367,7 +399,7 @@ function editCategory($title, $id) {
     header("Location: categories.php?source=edit_category&id={$id}");
     exit();
   }else{
-    $trimmed_title = strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $title));
+    $trimmed_title = stripSpecialChars($title);
     $link_to = "architecture?category=$trimmed_title";
     mysqli_stmt_bind_param($stmt, "ss", $title, $link_to);
     mysqli_stmt_execute($stmt);
@@ -407,22 +439,6 @@ function editProject($title, $subtitle, $description, $categoryId, $id) {
   }else{
     $link_to = strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $title));
     mysqli_stmt_bind_param($stmt, "sssss", $title, $link_to, $subtitle, $description, $categoryId);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);  
-  }
-}
-
-function addDropzoneImagesToDB($project_id, $folder_name, $imageName){
-  global $connection;
-
-  $query = "INSERT INTO projects_fotos (project_id, folder_name, image) VALUES (?, ?, ?);";
-  $stmt = mysqli_stmt_init($connection);
-
-  if(!mysqli_stmt_prepare($stmt, $query)){
-    header("Location: projects.php?source=project_fotos");
-    exit();
-  }else{
-    mysqli_stmt_bind_param($stmt, "sss", $project_id, $folder_name, $imageName);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);  
   }
