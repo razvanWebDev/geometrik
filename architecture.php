@@ -74,7 +74,6 @@
                
                 if($page_type == "category"){
                     //display projects
-                  //  $project_id = (!empty($row['id']) ? $row['id'] : "");
                     $project_first_foto = "SELECT * FROM projects_fotos WHERE project_id = $current_id ORDER BY id LIMIT 1";
                     $result = mysqli_query($connection, $project_first_foto);
                     while($row = mysqli_fetch_assoc($result)){
