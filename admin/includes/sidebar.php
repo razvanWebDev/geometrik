@@ -70,7 +70,7 @@
         </li>
         <li class="nav-item sidebar-page-header">
           <a href="#" class="nav-link sidebar-page-title">
-            <i class="nav-icon fas fa-address-card"></i>
+            <i class="nav-icon fas fa-handshake"></i>
             <p>
               Collaborations Page
               <i class="right fas fa-angle-left"></i>
@@ -95,7 +95,7 @@
           <a href="#" class="nav-link sidebar-page-title">
             <i class="nav-icon fas fa-briefcase"></i>
             <p>
-              Architecture
+              Architecture Page
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -116,9 +116,32 @@
         </li>
         <li class="nav-item sidebar-page-header">
           <a href="#" class="nav-link sidebar-page-title">
+            <i class="nav-icon fab fa-artstation"></i>
+            <p>
+              Art & Instalations Page
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="art_page_text.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Page Text</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="art_page_photos.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Photos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item sidebar-page-header">
+          <a href="#" class="nav-link sidebar-page-title">
             <i class="nav-icon fas fa-envelope"></i>
             <p>
-              Contact
+              Contact Page
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
