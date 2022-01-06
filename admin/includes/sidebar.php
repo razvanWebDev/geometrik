@@ -70,6 +70,29 @@
         </li>
         <li class="nav-item sidebar-page-header">
           <a href="#" class="nav-link sidebar-page-title">
+            <i class="nav-icon fas fa-address-card"></i>
+            <p>
+              Collaborations Page
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="collaborations_page_text.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Page Text</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="collaborations_page_photos.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Photos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item sidebar-page-header">
+          <a href="#" class="nav-link sidebar-page-title">
             <i class="nav-icon fas fa-briefcase"></i>
             <p>
               Architecture
