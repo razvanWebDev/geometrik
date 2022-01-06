@@ -62,6 +62,13 @@ window.onload = () => {
     });
   });
 
+  // redirect when finished changing fotos
+  if (btnDone) {
+    btnDone.addEventListener("click", () => {
+      window.location = currentPageURL;
+    });
+  }
+
   // end of window.onload
 };
 

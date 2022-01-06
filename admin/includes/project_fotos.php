@@ -25,7 +25,7 @@
       <div id="preview" class="dropzone-previews"></div>
 
       <div class="col-12">
-        <a href="javascript:history.back(1)" class="btn btn-success btn-block">DONE</a>
+      <button class="btn btn-success btn-block" id="btnDone">DONE</button>
       </div>
 <!-- card body -->
     </div>
