@@ -2,14 +2,15 @@
 $site_key = '';
 $secret_key = '';
 
-// ONLINE (infinityfree)=============
+//website url needed for forgot password
+$website_url = "www.gdarcht.com";
 
-// $server = 'sql108.epizy.com';
-// $username = 'epiz_29581335';
-// $password = 'bTEi09aoTZ9P';
-// $dbname = 'epiz_29581335_new_template'; 
+// ONLINE =============
 
-$website_url = "www.website-template.great-site.net";
+// $server = 'sql5c38c.carrierzone.com';
+// $username = 'gdarchtcom166742';
+// $password = 'Geo2022!';
+// $dbname = 'geometrik_gdarchtcom166742'; 
 
 //LOCAL=================================
   $server = 'localhost';
