@@ -6,7 +6,7 @@
         <img id="logo" src="img/" alt="">
         <h1>GEOMETRIK<br><span class="subtitle-span">Arhitecture Office</span></h1>
     </a>
-    <hr>
+    <nav class="header-menu">
         <ul class="nav-links">
             <?php
                 $query = "SELECT * FROM nav_links ORDER BY id";

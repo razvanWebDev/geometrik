@@ -62,9 +62,7 @@ if (mainCarousel) {
   var flkty = new Flickity(".main-carousel", {
     cellAlign: "left",
     lazyLoad: true,
-    // wrapAround: true,
     contain: true,
-    // pageDots: false,
   });
 }
 

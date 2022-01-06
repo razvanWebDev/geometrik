@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Sarpanch:wght@800;900&display=swap");
 :root {
   --main-color: #4d4948;
-  --main-color-transparent: rgba(77, 73, 72, 0.2);
+  --main-color-transparent: rgba(77, 73, 72, 0.9);
   --white-color: #ececec;
   --border-color: #948784;
 
@@ -245,16 +245,18 @@ header.hideNav {
   font-weight: 800;
   line-height: 1;
   color: var(--main-text-color);
+  background-color: var(--main-color);
 }
 
 .subtitle-span {
   color: var(--white-color);
-  font-size: 0.43em;
-  font-weight: 400;
+  font-size: 0.42em;
+  font-weight: 500;
   letter-spacing: 0.3em;
   font-family: "Poppins", sans-serif;
   display: block;
   text-align: center;
+  background-color: var(--main-text-color);
 }
 
 .nav-links {
@@ -296,7 +298,7 @@ header .nav-links li:last-child {
   height: 0.3em;
   margin: 0.4em;
   transition: all 0.7s ease;
-  background-color: var(--main-color);
+  background-color: var(--white-color);
 }
 
 #hamburger.toggle-burger .line1 {
@@ -674,22 +676,6 @@ footer a:visited {
 /* ################################## RESPONSIVE ########################## */
 
 @media screen and (max-width: 1024px) {
-  header {
-    position: fixed;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
-    -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
-  }
-
-  header hr {
-    display: none;
-  }
-
   #hamburger {
     display: block;
   }
@@ -714,6 +700,7 @@ footer a:visited {
     padding: 10vh 0;
     background-color: var(--main-color-transparent);
     color: var(--white-color);
+    font-size: 1.5em;
   }
 
   header .nav-links li {
@@ -721,9 +708,31 @@ footer a:visited {
     font-size: 1.5em;
     min-height: 1em;
     padding: 0;
-    margin-bottom: 2em;
+    margin: 0 0 2em;
     font-weight: 300;
     text-align: center;
+  }
+  header .nav-links li a {
+    color: var(--white-color);
+  }
+
+  .simple-page-layout {
+    flex-direction: column;
+  }
+  .simple-page-carousel-container {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 3em;
+  }
+  .simple-page-description-container {
+    position: relative;
+    width: 100%;
+    padding-left: 0;
+    overflow: auto;
+  }
+  .top-fade,
+  .bottom-fade {
+    display: none;
   }
 
   .to-top-arrow {
