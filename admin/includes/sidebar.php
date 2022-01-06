@@ -146,12 +146,24 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+          <li class="nav-item">
+              <a href="contact_page_text.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Page Text</p>
+              </a>
+            </li>
             <li class="nav-item">
+              <a href="contact_page_photos.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Photos</p>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
               <a href="contact.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>View messages</p>
               </a>
-            </li>
+            </li> -->
           </ul>
         </li>
         <li class="nav-item sidebar-page-header">

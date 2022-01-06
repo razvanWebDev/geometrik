@@ -10,6 +10,7 @@
 
     ?>
         <div class="simple-page-carousel-container">
+        <?php if($fotos_count > 0){ ?>
             <div class="simple-page-main-carousel <?php echo $hide_nav_class ?>"
                 data-flickity='{"fullscreen": true, "pageDots": false, "bgLazyLoad": true}'>
                 <?php
@@ -41,6 +42,8 @@
                     }
                 ?>
             </div>
+        <!--if $fotos_count > 0 end-->
+        <?php } ?>
         </div>
         <div class="simple-page-description-container">
             <div class="top-fade"></div>
