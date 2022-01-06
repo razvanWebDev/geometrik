@@ -9,6 +9,23 @@ function ifExists($item){
   return $item != "" && $item != " " && $item != "  " && $item != "undefined" && $item != null ;
 }
 
+//strip special characters & replace space with "-"
+function stripSpecialChars($string){
+  global $connection;
+  return strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $string));
+}
+
+//check if item exists in DB
+function isNameTaken ($tblName, $db_name, $name){
+  global $connection;
+
+  $query = "SELECT * FROM {$tblName} WHERE {$db_name} = '{$name}'";
+  $result = mysqli_query($connection, $query);
+  $count = mysqli_num_rows($result);
+  $isNameTaken = $count > 0;
+  return $isNameTaken;
+}
+
 function userExists($username, $email) {
   global $connection;
 
@@ -369,23 +386,6 @@ function addPageImagesToDB($page_id, $folder_name, $imageName){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);  
   }
-}
-
-//strip special characters & replace space with "-"
-function stripSpecialChars($string){
-  global $connection;
-  return strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $string));
-}
-
-//check if item exists in DB
-function isNameTaken ($tblName, $db_name, $name){
-  global $connection;
-
-  $query = "SELECT * FROM {$tblName} WHERE {$db_name} = '{$name}'";
-  $result = mysqli_query($connection, $query);
-  $count = mysqli_num_rows($result);
-  $isNameTaken = $count > 0;
-  return $isNameTaken;
 }
 
 function createCategory($title, $imageName) {

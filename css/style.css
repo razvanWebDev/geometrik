@@ -443,7 +443,11 @@ footer a:visited {
 .simple-page-main-carousel {
   width: 100%;
   /* .simple-page-main-carousel-nav height + top-margin */
-  height: calc(100% - 6em);
+  height: calc(100% - 7em);
+}
+.simple-page-main-carousel.hide-nav {
+  /* full height if there is only 1 foto and the nav is hidden*/
+  height: 100%;
 }
 .simple-page-carousel-cell {
   width: 100%;
@@ -453,6 +457,11 @@ footer a:visited {
 .simple-page-main-carousel-nav {
   max-width: 100%;
   height: 6em;
+  margin-top: 1em;
+}
+/* hide carousel nav with 1 pic */
+.simple-page-main-carousel-nav.hide-nav {
+  display: none;
 }
 .simple-page-main-carousel-nav .simple-page-carousel-nav-cell {
   width: 8em;
