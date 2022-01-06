@@ -247,6 +247,16 @@ header.hideNav {
   color: var(--main-text-color);
 }
 
+.subtitle-span {
+  color: var(--white-color);
+  font-size: 0.43em;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  font-family: "Poppins", sans-serif;
+  display: block;
+  text-align: center;
+}
+
 .nav-links {
   list-style: none;
   display: flex;

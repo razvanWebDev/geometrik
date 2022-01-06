@@ -4,7 +4,7 @@
 <header>
     <a href="/" id="logo-section">
         <img id="logo" src="img/" alt="">
-        <h1>GEOMETRIK</h1>
+        <h1>GEOMETRIK<br><span class="subtitle-span">Arhitecture Office</span></h1>
     </a>
     <hr>
         <ul class="nav-links">
