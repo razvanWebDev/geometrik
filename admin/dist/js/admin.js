@@ -61,12 +61,6 @@ window.onload = () => {
       ],
     });
   });
-  // redirect when finished changing fotos
-  if (btnDone) {
-    btnDone.addEventListener("click", () => {
-      window.location = currentPageURL;
-    });
-  }
 
   // end of window.onload
 };
@@ -74,7 +68,7 @@ window.onload = () => {
 //Dropzone file uploads (must pe outside window.onload area!!! )==============
 //upload files
 Dropzone.options.dropzoneFrom = {
-  maxFilesize: 5,
+  maxFilesize: 4,
   resizeWidth: 1920,
   resizeQuality: 0.8,
   acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
@@ -95,7 +89,7 @@ Dropzone.options.dropzoneFrom = {
 //display uploaded files
 function list_image(post_id) {
   $.ajax({
-    url: `upload_project_fotos.php?post_id=${post_id}`,
+    url: `upload_${fotos_for.value}_fotos.php?post_id=${post_id}`,
     success: function (data) {
       $("#preview").html(data);
     },
@@ -110,7 +104,7 @@ if (typeof post_id !== "undefined" && post_id !== null) {
 $(document).on("click", ".remove_image", function () {
   var id = $(this).attr("id");
   $.ajax({
-    url: `upload_project_fotos.php?post_id=${post_id.value}`,
+    url: `upload_${fotos_for.value}_fotos.php?post_id=${post_id.value}`,
     method: "POST",
     data: { id: id },
     success: function (data) {

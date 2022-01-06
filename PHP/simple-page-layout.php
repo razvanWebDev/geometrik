@@ -1,7 +1,6 @@
-<!-- before including, take care of these 3 queries!!!!:
+<!-- before including, take care of these 2 queries!!!!:
 1. $carousel_fotos_query
-2. $carousel_nav_fotos_query
-3. $page_description_query -->
+2. $page_description_query -->
 
 <div class="simple-page-layout">
         <div class="simple-page-carousel-container">
@@ -24,7 +23,7 @@
             <div class="simple-page-main-carousel-nav"
                 data-flickity='{"asNavFor": ".simple-page-main-carousel", "contain": true, "pageDots": false}'>
                 <?php
-                    $fotos_result = mysqli_query($connection, $carousel_nav_fotos_query);
+                    $fotos_result = mysqli_query($connection, $carousel_fotos_query);
 
                     while($row = mysqli_fetch_assoc($fotos_result)){
                         $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
@@ -42,6 +41,7 @@
             <div class="top-fade"></div>
             <div class="simple-page-description">
                 <?php 
+                    $title = $subtitle = $description = "";
                     $description_result = mysqli_query($connection, $page_description_query);
                     while($row = mysqli_fetch_assoc($description_result)){
                         $title = (!empty($row['title']) ? $row['title'] : "");

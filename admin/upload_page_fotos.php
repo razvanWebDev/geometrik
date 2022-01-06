@@ -6,41 +6,54 @@
 //Upload Image
 if(isset($_POST['post_id']) && $_POST['post_id'] > 0){
   $post_id = escape($_POST['post_id']);
-  $target_folder = '../img/projects/'.$post_id.'/';
-  $folder_name ='projects/'.$post_id;
+
+  $fotos_query = "SELECT * FROM  simple_pages_text WHERE id = {$post_id} ORDER BY id DESC";
+  $fotos_result = mysqli_query($connection, $fotos_query);
+  while($row = mysqli_fetch_assoc($fotos_result)){
+    $folder_name = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
+  }
+
+  $target_folder = '../img/'.$folder_name.'/';
 
   if(!empty($_FILES)){
     $file = $_FILES['file'];
     $image = uploadFile($file, $target_folder);
-    addProjectImagesToDB($post_id, $folder_name, $image);
+    addPageImagesToDB($post_id, $folder_name, $image);
   }
 }
 
 //Delete image
 if(isset($_POST['id'])){
-  $post_id = escape($_GET['post_id']);
   $image_id = escape($_POST['id']);
-  $root_folder = '../img/projects/'.$post_id.'/';
+
+  $fotos_query = "SELECT * FROM  simple_pages_fotos WHERE id = {$image_id} ORDER BY id LIMIT 1";
+  $fotos_result = mysqli_query($connection, $fotos_query);
+  while($row = mysqli_fetch_assoc($fotos_result)){
+    $folder_name = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
+  }
+
+  $root_folder = '../img/'.$folder_name.'/';
 
   //delete file
-  deleteFileFromRow("projects_fotos", "image", $image_id, $root_folder);
+  deleteFileFromRow("simple_pages_fotos", "image", $image_id, $root_folder);
   //remove from db
-  deleteItem('projects_fotos', $image_id);
+  deleteItem('simple_pages_fotos', $image_id);
 }
 
 //Display uploaded images
 if(isset($_GET['post_id']) && $_GET['post_id'] > 0){
-
   $post_id = escape($_GET['post_id']);
-  $root_folder = '../img/projects/'.$post_id.'/';
   
   $output = '<div class="uploaded-images-container">';
 
-    $fotos_query = "SELECT * FROM  projects_fotos WHERE project_id = {$post_id} ORDER BY id DESC";
+    $fotos_query = "SELECT * FROM  simple_pages_fotos WHERE page_id = {$post_id} ORDER BY id DESC";
     $fotos_result = mysqli_query($connection, $fotos_query);
     while($row = mysqli_fetch_assoc($fotos_result)){
       $image_id = (!empty($row['id']) ? $row['id'] : ""); 
       $image = (!empty($row['image']) ? $row['image'] : ""); 
+      $folder_name = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
+      $root_folder = '../img/'.$folder_name.'/';
+
       $output .= '<div class="uploaded-image-container">
                     <img src="'.$root_folder.$image.'" class="img-thumbnail"/>
                     <button type="button" class="btn btn-danger btn-sm remove_image" id="'.$image_id.'"> 

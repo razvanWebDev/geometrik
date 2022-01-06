@@ -29,7 +29,7 @@
             <img src="img/<?php echo $bg_image_folder ?>/<?php echo $bg_image ?>" alt="" class="bg-image bg-bottom">
         <?php
             //list all the categories
-            $QUERY_get_grid_cells_content = "SELECT * FROM nav_links ORDER BY id LIMIT $item_counter, $cells_per_grid";
+            $QUERY_get_grid_cells_content = "SELECT * FROM nav_links WHERE link_to != 'index' ORDER BY id LIMIT $item_counter, $cells_per_grid";
             $grid_cells_content = mysqli_query($connection, $QUERY_get_grid_cells_content);
             //insert items
             while ($row = mysqli_fetch_assoc($grid_cells_content)) {

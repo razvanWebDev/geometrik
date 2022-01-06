@@ -26,7 +26,7 @@ if(isset($_GET['failed'])){
 }
 
 if(isset($_GET['id'])){
-  $category_id = $_GET['id'];
+  $category_id = escape($_GET['id']);
 }
 
 $query = "SELECT * FROM categories WHERE id = {$category_id}";

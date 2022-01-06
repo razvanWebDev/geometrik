@@ -19,12 +19,13 @@
           Drop files here or click to upload
         </div>
         <input type="hidden" name="post_id" id="post_id" value="<?php echo $post_id ?>">
+        <input type="hidden" name="fotos_for" id="fotos_for" value="project">
       </form>
 
       <div id="preview" class="dropzone-previews"></div>
 
       <div class="col-12">
-        <button class="btn btn-success btn-block" id="btnDone">DONE</button>
+        <a href="javascript:history.back(1)" class="btn btn-success btn-block">DONE</a>
       </div>
 <!-- card body -->
     </div>

@@ -339,7 +339,7 @@ function deleteFolder($dir) {
   }
 }
 
-function addDropzoneImagesToDB($project_id, $folder_name, $imageName){
+function addProjectImagesToDB($project_id, $folder_name, $imageName){
   global $connection;
 
   $query = "INSERT INTO projects_fotos (project_id, folder_name, image) VALUES (?, ?, ?);";
@@ -354,6 +354,23 @@ function addDropzoneImagesToDB($project_id, $folder_name, $imageName){
     mysqli_stmt_close($stmt);  
   }
 }
+
+function addPageImagesToDB($page_id, $folder_name, $imageName){
+  global $connection;
+
+  $query = "INSERT INTO simple_pages_fotos (page_id, folder_name, image) VALUES (?, ?, ?);";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: admin.php");
+    exit();
+  }else{
+    mysqli_stmt_bind_param($stmt, "sss", $page_id, $folder_name, $imageName);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);  
+  }
+}
+
 //strip special characters & replace space with "-"
 function stripSpecialChars($string){
   global $connection;
@@ -439,6 +456,22 @@ function editProject($title, $subtitle, $description, $categoryId, $id) {
   }else{
     $link_to = strtolower(preg_replace("/[^a-zA-Z0-9]+/", "-", $title));
     mysqli_stmt_bind_param($stmt, "sssss", $title, $link_to, $subtitle, $description, $categoryId);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);  
+  }
+}
+
+function editSimplePageText($title, $subtitle, $description, $page_id) {
+  global $connection;
+
+  $query = "UPDATE simple_pages_text SET title = ?, subtitle = ?, description = ? WHERE id = {$page_id}";
+  $stmt = mysqli_stmt_init($connection);
+
+  if(!mysqli_stmt_prepare($stmt, $query)){
+    header("Location: admin.php");
+    exit();
+  }else{
+    mysqli_stmt_bind_param($stmt, "sss", $title, $subtitle, $description);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);  
   }
