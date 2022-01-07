@@ -464,7 +464,6 @@ footer a:visited {
 .simple-page-carousel-cell {
   width: 100%;
   height: 100%;
-  /* box-shadow: inset 0px -4px 8px -2px #000000; */
 }
 .simple-page-main-carousel-nav {
   max-width: 100%;
@@ -491,7 +490,7 @@ footer a:visited {
   position: relative;
   width: 40%;
   height: 100%;
-  padding-left: 3em;
+  padding: 2px 0 2px 3em; /* Depnding on screen width, sometimes there is a small gap below the fades */
   color: var(--white-color);
   overflow: hidden;
 }
@@ -521,10 +520,9 @@ footer a:visited {
 .top-fade,
 .bottom-fade {
   position: absolute;
-  width: calc(100% - 3.7em);
+  width: 100%;
   height: 5em;
-  /* z-index: 10; */
-  left: 2.8em;
+  left: 0;
   opacity: 0;
   transition: opacity 0.3s ease-in;
 }
@@ -680,10 +678,10 @@ footer a:visited {
     display: block;
   }
   .header-menu {
-    width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
+    width: 100vw;
     height: 100vh;
     z-index: 1;
     display: flex;
@@ -727,12 +725,16 @@ footer a:visited {
   .simple-page-description-container {
     position: relative;
     width: 100%;
+    height: 70vh;
     padding-left: 0;
-    overflow: auto;
+  }
+
+  .simple-page-description {
+    box-sizing: border-box;
   }
   .top-fade,
   .bottom-fade {
-    display: none;
+    height: 2em;
   }
 
   .to-top-arrow {
@@ -745,28 +747,6 @@ footer a:visited {
     color: var(--white-color);
     font-size: 1.2em;
   }
-
-  .contact-container {
-    flex-direction: column;
-  }
-  .contact-container .contact-logo {
-    width: 100%;
-    align-items: center;
-    margin-bottom: 5em;
-  }
-  .logo-details {
-    width: 100%;
-  }
-  .contact-container .contact-logo-img {
-    width: 15em;
-    margin-bottom: 2em;
-    display: block;
-    margin: 0 auto 2em auto;
-  }
-
-  .contact-container form {
-    width: 100%;
-  }
 }
 
 @media screen and (max-width: 450px) {
@@ -774,7 +754,7 @@ footer a:visited {
     --sides-padding: 5vw;
   }
   body {
-    font-size: 0.6em;
+    font-size: 0.7em;
   }
   .nav-links {
     width: 100%;
