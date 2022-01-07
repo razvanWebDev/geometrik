@@ -351,7 +351,7 @@ footer a:visited {
 .main-carousel {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   border: 2px solid var(--border-color);
 }
 /* hide disabled button */
@@ -754,13 +754,16 @@ footer a:visited {
     --sides-padding: 5vw;
   }
   body {
-    font-size: 0.7em;
+    font-size: 0.6em;
   }
   .nav-links {
     width: 100%;
   }
   #logo-section h1 {
-    font-size: 1.4em;
+    font-size: 2em;
+  }
+  .links-container-item p {
+    font-size: 1em;
   }
 }
 
