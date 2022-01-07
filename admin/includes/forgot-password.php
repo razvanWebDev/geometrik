@@ -1,5 +1,10 @@
-<?php include "../../PHP/db.php" ?>
-<?php include "functions.php" ?>
+<?php
+ob_start(); 
+include "../../PHP/db.php" ?>
+<?php include "functions.php";
+session_start();
+
+?>
 
 <?php
 if(isset($_POST['forgot-password-submit'])) {
@@ -10,6 +15,20 @@ if(isset($_POST['forgot-password-submit'])) {
     $expires = date("U") + 1800; //60min
 
     $userEmail = escape($_POST['email']);
+
+    //validate input
+    $emailErr = "";
+    if(empty($userEmail)){
+        $emailErr = "required";
+        }elseif(!filter_var($userEmail, FILTER_VALIDATE_EMAIL)){
+        $emailErr = "invalid";
+        }elseif(userExists($userEmail, $userEmail) == false){
+        $emailErr = "notFound";
+    }
+    if(!empty($emailErr)){
+        header("Location: ../forgot-password.php?error=$emailErr&value=$userEmail");
+        exit();
+    }
 
     //delete privious tokens
     $sql = "DELETE FROM pwdreset WHERE pwdResetEmail=?;";
@@ -46,17 +65,21 @@ if(isset($_POST['forgot-password-submit'])) {
     $message = '<p>We received a password request. The link to reset your password is bellow.
     </br>If you did not make this request, you can ignore this email</p>';
     $message .= '<p>Here is your password reset link: </br>';
-    $message .= '<a href="'. $url .'">'. $url . '</a></p>';
+    $message .= '<a href="'.$url.'">'.$url. '</a></p>';
 
     $headers = "From: website <website@gmail.com>\r\n";
     $headers .= "Reply-To: website@gmail.com\r\n";
     $headers .= "Content-type: text/html\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion(); 
 
     mail($to, $subject, $message, $headers);
 
+    // echo "userEmail: " . $userEmail;
+    // echo "url: " . $url;
+
     header("Location: ../forgot-password.php?reset=success");
-
-
 }else{
     header("Location: ../index.php");
 }
+ob_end_flush(); 
+?>

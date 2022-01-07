@@ -1,4 +1,31 @@
 <?php include "../PHP/db.php" ?>
+<?php
+$inputValue = "";
+//success
+$subtitle_p = "You forgot your password? Enter your email to reset password";
+$subtitle_p_color_class = "";
+
+if(isset($_GET['error'])){
+    if(isset($_GET['value'])){
+        $inputValue = $_GET['value'];
+    }
+    $inputErrorClass = "is-invalid";
+    $subtitle_p_color_class = "text-danger";
+
+    if($_GET['error'] == 'required'){
+        $subtitle_p = "Enter email!";
+    }elseif($_GET['error'] == 'invalid'){
+        $subtitle_p = "Invalid email!";
+    }elseif($_GET['error'] == 'notFound'){
+        $subtitle_p = "There is no account with this email address!";
+    }
+}elseif(isset($_GET['reset'])){
+    if($_GET['reset'] == success){
+        $subtitle_p = "Success! Please check your email.";
+        $subtitle_p_color_class = "text-success";
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,10 +50,10 @@
         <h1><b>Admin</b></h1>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+      <p class="login-box-msg <?php echo $subtitle_p_color_class ?>"><?php echo $subtitle_p ?></p>
       <form action="includes/forgot-password.php" method="post">
         <div class="input-group mb-3">
-          <input name="email" type="email" class="form-control" placeholder="Email">
+          <input name="email" type="email" class="form-control <?php echo $inputErrorClass ?>" placeholder="Email" value="<?php echo $inputValue ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -40,13 +67,6 @@
           <!-- /.col -->
         </div>
       </form>
-      <?php
-        if(isset($_GET["reset"])){
-          if($_GET["reset"] == "success"){
-            echo '<p class="text-success mt-1">Check your e-mail!<p>';
-          }
-        }
-      ?>
       <p class="mt-3 mb-1">
         <a href="index.php">Login</a>
       </p>
