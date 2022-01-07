@@ -67,9 +67,12 @@ function createUser($firstname, $lastname, $username, $email, $phone, $user_imag
 }
 
 function loginUser($username, $password){
+  global $connection;
+
   $userExists = userExists($username, $username);
 
   if($userExists === false) {
+    echo "Error";
     header("Location: ../index.php");
     exit();
   }
@@ -78,14 +81,18 @@ function loginUser($username, $password){
   $check_passwords = password_verify($password, $hashed_password);
 
   if($check_passwords === false) {
+    echo "Error";
     header("Location: ../index.php");
     exit();
   }else if($check_passwords === true){
+    header("Location: ../admin.php");
+    echo "Logged in";
+    
     $_SESSION["userId"] = $userExists["id"];
     $_SESSION["username"] = $userExists["username"];
     $_SESSION["user_image"] = $userExists["user_image"];
 
-    header("Location: ../admin.php");
+  
     exit();
   }
 }

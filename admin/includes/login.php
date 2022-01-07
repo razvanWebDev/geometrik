@@ -1,12 +1,16 @@
-<?php include "../../PHP/db.php" ?>
-<?php include "functions.php" ?>
-<?php session_start(); ?>
+<?php 
+include "../../PHP/db.php";
+include "functions.php";
+session_start();
+ob_start(); 
 
-<?php
 if(isset($_POST['login'])) {
     $username = escape($_POST['username']);
     $password = escape($_POST['password']);
 
     loginUser($username, $password);
 }
+
+ob_end_flush(); 
+?>
 
