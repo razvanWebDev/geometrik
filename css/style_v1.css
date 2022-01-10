@@ -619,6 +619,15 @@ footer a:visited {
   object-position: center;
   z-index: -1;
 }
+.bg-image.bg-bottom {
+  object-position: center bottom;
+}
+.bg-image.bg-left-bottom {
+  object-position: left bottom;
+}
+.bg-image.bg-contain {
+  object-fit: contain;
+}
 .overlay {
   position: absolute;
   top: 0;
@@ -636,9 +645,7 @@ footer a:visited {
     )
     repeat 0 0;
 }
-.bg-image.bg-bottom {
-  object-position: center bottom;
-}
+
 .links-container-item .bg-image {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;

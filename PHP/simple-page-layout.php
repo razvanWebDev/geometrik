@@ -20,7 +20,7 @@
                         $bg_image = (!empty($row['image']) ? $row['image'] : "");
                 ?>
                 <div class="simple-page-carousel-cell">
-                    <img src="img/<?php echo $bg_image_folder."/".$bg_image ?>" class="bg-image" alt="">
+                    <img src="img/<?php echo $bg_image_folder."/".$bg_image ?>" class="bg-image bg-contain" alt="">
                 </div>
                 <?php
                     }

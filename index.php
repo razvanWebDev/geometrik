@@ -26,7 +26,7 @@
                 $bg_image = $row['bg_image'];
             }
         ?>
-            <img src="img/<?php echo $bg_image_folder ?>/<?php echo $bg_image ?>" alt="" class="bg-image bg-bottom">
+            <img src="img/<?php echo $bg_image_folder ?>/<?php echo $bg_image ?>" alt="" class="bg-image bg-left-bottom">
         <?php
             //list all the categories
             $QUERY_get_grid_cells_content = "SELECT * FROM nav_links WHERE link_to != 'index' ORDER BY id LIMIT $item_counter, $cells_per_grid";
