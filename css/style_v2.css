@@ -236,7 +236,8 @@ header.hideNav {
 }
 
 #logo {
-  max-width: 8em;
+  width: 25em;
+  transform: translate(-2.5em, 0.5em);
 }
 
 #logo-section h1 {
@@ -271,6 +272,7 @@ header .nav-links li {
   margin: 0 1em;
   color: var(--main-text-color);
   cursor: pointer;
+  text-align: center;
 }
 header .nav-links li a {
   color: var(--main-text-color);

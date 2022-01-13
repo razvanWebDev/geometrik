@@ -40,19 +40,19 @@
             <div class="small-box bg-warning">
               <div class="inner">
                 <?php
-                  $query = "SELECT * FROM contact";
+                  $query = "SELECT * FROM projects";
                   $result = mysqli_query($connection, $query);
                   $num_items = mysqli_num_rows($result);
                   ?>
                 <h3>
                   <?php echo $num_items ?>
                 </h3>
-                <p>Total Messages</p>
+                <p>Total Projects</p>
               </div>
               <div class="icon">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-briefcase"></i>
               </div>
-              <a href="contact.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="projects.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>

@@ -3,8 +3,8 @@
 ?>
 <header>
     <a href="/" id="logo-section">
-        <img id="logo" src="img/" alt="">
-        <h1>GEOMETRIK<br><span class="subtitle-span">Arhitecture Office</span></h1>
+        <img id="logo" src="img/Geometrik.png" alt="Logo">
+        <!-- <h1>GEOMETRIK<br><span class="subtitle-span">Arhitecture Office</span></h1> -->
     </a>
     <nav class="header-menu">
         <ul class="nav-links">
