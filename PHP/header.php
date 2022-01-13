@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/flickity.min.css" cmedia="screen">
     <link rel="stylesheet" href="css/fullscreen.css" cmedia="screen">
-    <link rel="stylesheet" href="css/style_v2.css">
+    <link rel="stylesheet" href="css/style_v3.css">
     <title>Geometrik</title>
     <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $site_key ?>"></script>
 

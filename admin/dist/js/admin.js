@@ -51,8 +51,11 @@ window.onload = () => {
     $("#summernote").summernote({
       height: 200,
       toolbar: [
-        ["font", ["bold", "underline", "clear"]],
         ["fontname", ["fontname"]],
+        ["fontsize", ["fontsize"]],
+        ["height", ["height"]],
+        ["font", ["bold", "underline", "clear"]],
+
         ["color", ["color"]],
         ["para", ["ul", "ol", "paragraph"]],
         ["table", ["table"]],
