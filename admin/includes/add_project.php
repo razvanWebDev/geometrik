@@ -28,7 +28,7 @@ $selectedCategory = isset($_GET['category']) ? $_GET['category'] : "";
 if(isset($_POST['submit'])) {
   $title = escape($_POST['title']);
   $subtitle = escape($_POST['subtitle']);
-  $description = escape($_POST['description']);
+  $description = stripslashes($_POST['description']);
   $categoryId = escape($_POST['category_select']);
   
   $titleError = "";

@@ -34,7 +34,7 @@ $descriptionInputValue = isset($_GET['description']) ? $_GET['description'] : $d
 if(isset($_POST['submit'])) {
   $title = escape($_POST['title']);
   $subtitle = escape($_POST['subtitle']);
-  $description = escape($_POST['description']);
+  $description = stripslashes($_POST['description']);
   
   $titleError = "";
 
