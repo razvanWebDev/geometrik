@@ -88,7 +88,7 @@ if(isset($_POST['submit'])) {
             </div>
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea id="summernote" name="description">
+              <textarea id="body" name="description">
                     <?php echo $descriptionInputValue ?>
                 </textarea>
             </div>
