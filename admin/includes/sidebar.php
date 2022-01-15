@@ -118,7 +118,30 @@
           <a href="#" class="nav-link sidebar-page-title">
             <i class="nav-icon fab fa-artstation"></i>
             <p>
-              Art & Instalations Page
+              Interiors Page
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="interiors_page_text.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Page Text</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="interiors_page_photos.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Photos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item sidebar-page-header">
+          <a href="#" class="nav-link sidebar-page-title">
+            <i class="nav-icon fab fa-artstation"></i>
+            <p>
+              Art & Landscape Page
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
