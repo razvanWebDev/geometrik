@@ -46,24 +46,6 @@ window.onload = () => {
   $(function () {
     bsCustomFileInput.init();
   });
-  //initialize summernote text-editor
-  $(function () {
-    $("#summernote").summernote({
-      height: 200,
-      toolbar: [
-        ["fontname", ["fontname"]],
-        ["fontsize", ["fontsize"]],
-        ["height", ["height"]],
-        ["font", ["bold", "underline", "clear"]],
-
-        ["color", ["color"]],
-        ["para", ["ul", "ol", "paragraph"]],
-        ["table", ["table"]],
-        ["insert", ["link"]],
-        ["view", ["fullscreen", "codeview", "help"]],
-      ],
-    });
-  });
 
   // redirect when finished changing fotos
   if (btnDone) {
@@ -71,6 +53,15 @@ window.onload = () => {
       window.location = currentPageURL;
     });
   }
+
+  // CKEditor=======================================
+  const body = document.querySelector("#body");
+  if (body != undefined && body != null) {
+    ClassicEditor.create(body).catch((error) => {
+      console.error("There was a problem initializing the editor.", error);
+    });
+  }
+  // ***********************************************************
 
   // end of window.onload
 };

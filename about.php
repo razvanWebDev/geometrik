@@ -8,7 +8,6 @@
 
         include "PHP/simple-page-layout.php";
     ?>
-
 </section>
 
 <?php include "PHP/footer.php"; ?>

@@ -24,13 +24,14 @@ if(!isset($_SESSION["username"])){
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-   <!-- summernote text editor-->
-   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <!-- CKEeditor-->
+  <script src="plugins/CKEditor/build/ckeditor.js"></script>
    <!-- dropzonejs -->
   <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
   <!-- Theme style -->
-
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- CKEditor output style -->
+  <link rel="stylesheet" href="dist/css/ckeditor.css">
   <!-- Custom style -->
   <link rel="stylesheet" href="dist/css/admin.css">
 
