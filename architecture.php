@@ -73,13 +73,13 @@
                 $bg_image = (!empty($row['bg_image']) ? $row['bg_image'] : "");
                
                 if($page_type == "category"){
+                    $link_to = "project?link={$link_to}";
                     //display projects
                     $project_first_foto = "SELECT * FROM projects_fotos WHERE project_id = $current_id ORDER BY id LIMIT 1";
                     $result = mysqli_query($connection, $project_first_foto);
                     while($row = mysqli_fetch_assoc($result)){
                         $bg_image_folder = (!empty($row['folder_name']) ? $row['folder_name'] : ""); 
                         $bg_image = (!empty($row['image']) ? $row['image'] : "");
-                        $link_to = "project?link={$link_to}";
                     }
                 }
                 //only show categories if they have projects
