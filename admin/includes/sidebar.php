@@ -141,7 +141,7 @@
           <a href="#" class="nav-link sidebar-page-title">
             <i class="nav-icon fab fa-artstation"></i>
             <p>
-              Art & Landscape Page
+              Art Page
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>

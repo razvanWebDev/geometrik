@@ -1,5 +1,5 @@
 
-<?php $page_title = "Art and Instalations page text"; ?>
+<?php $page_title = "Art page text"; ?>
 <?php include "includes/page_title.php"; ?>
 
 <!-- Main content -->
