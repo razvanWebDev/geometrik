@@ -1,7 +1,9 @@
-<?php include "../../PHP/db.php" ?>
-<?php include "functions.php" ?>
+<?php 
+ob_start();
+include "../../PHP/db.php";
+include "functions.php";
 
-<?php
+
 if(isset($_POST['reset-password-submit'])) {
     $selector = escape($_POST['selector']);
     $validator = escape($_POST['validator']);
@@ -67,6 +69,7 @@ if(isset($_POST['reset-password-submit'])) {
                                 mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
                                 mysqli_stmt_execute($stmt);
                                 header("Location: ../index.php?newpwd=passwordupdated");
+                                exit();
                             }
                         }
                     }
@@ -76,4 +79,7 @@ if(isset($_POST['reset-password-submit'])) {
     }
 }else{
     header("Location: ../index.php");
+    exit();
 }
+ob_end_clean();
+?>
