@@ -2,8 +2,13 @@
 //website url needed for forgot password
 $website_url = "http://gdarcht.com";
 
-// ONLINE =============
+// ONLINE ROMARG =============
+// $server = 'server-0267.whmpanels.com';
+// $username = 'r97625gdar_db_user';
+// $password = 'lhP[e^Chvv^0';
+// $dbname = 'r97625gdar_geometrik'; 
 
+// ONLINE EARTHLINK =============
 // $server = 'sql5c38c.carrierzone.com';
 // $username = 'gdarchtcom166742';
 // $password = 'Geo2022!';
